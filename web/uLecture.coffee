@@ -1,4 +1,4 @@
-window.localStorage.setItem 'history', JSON.stringify([])
+#window.localStorage.setItem 'history', JSON.stringify([])
 
 uLectureConfig = ($routeProvider) ->
     $routeProvider
@@ -19,6 +19,6 @@ uLectureConfig = ($routeProvider) ->
             templateUrl: 'view/comments.html'
     1
         
-uLecture = angular.module('uLecture', []).
+uLecture = angular.module('uLecture', ['ngResource']).
     config( uLectureConfig )
 1
