@@ -14,8 +14,10 @@ uLecture.controller('lectureController', function($scope, $location, $routeParam
 });
 
 uLecture.controller('commentController', function($scope, $location, $routeParams, lectureModel) {
-  var lecture;
+  var lecture, name;
   lecture = $routeParams.lectureId;
+  name = $routeParams.lectureName;
+  $scope.name = name;
   lectureModel.comments(lecture, function(l) {
     return $scope.comments = l;
   });
@@ -23,7 +25,7 @@ uLecture.controller('commentController', function($scope, $location, $routeParam
     lectureModel.addComment({
       comment: $scope.comment
     });
-    return $location.path('/comments/' + lecture);
+    return $location.path('/comments/' + lecture + '/' + name);
   };
 });
 

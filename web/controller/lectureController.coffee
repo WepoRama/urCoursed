@@ -16,11 +16,13 @@ uLecture.controller 'lectureController',
 uLecture.controller 'commentController',
     ($scope, $location, $routeParams,lectureModel) ->
        lecture = $routeParams.lectureId
+       name = $routeParams.lectureName
+       $scope.name = name
        lectureModel.comments lecture, (l) -> $scope.comments = l
        $scope.addComment = () ->
             lectureModel.addComment
                 comment: $scope.comment
-            $location.path('/comments/'+lecture)
+            $location.path('/comments/'+lecture+'/'+name)
 ###
 uLecture.controller 'addLectureController',
     ($scope, $location, $routeParams,lectureModel) ->

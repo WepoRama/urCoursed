@@ -1,10 +1,11 @@
+<h2> {{name}}</h2>
+Discussion:
 <ul>
     <li ng-repeat='comment in comments'>
     {{comment.comment}}</a> by: {{comment.author}}
 </ul>
 
-
-<div class='addLecture'>
+<div class='addComment'>
     <form name='newComment'>
         <label for='addComment'>Add Comment</label>
         <input id='commentURL' ng-model='comment'></input>
