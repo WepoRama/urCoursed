@@ -1,0 +1,13 @@
+<ul>
+    <li ng-repeat='comment in comments'>
+    {{comment.comment}}</a> by: {{comment.author}}
+</ul>
+
+
+<div class='addLecture'>
+    <form name='newComment'>
+        <label for='addComment'>Add Comment</label>
+        <input id='commentURL' ng-model='comment'></input>
+        <button ng-click='addComment()'>Comment</button>
+    </form>
+</div>
