@@ -13,12 +13,12 @@ uLecture.controller('lectureController', function($scope, $location, $routeParam
   return 1;
 });
 
-uLecture.controller('commentController', function($scope, $location, $routeParams, lectureModel) {
+uLecture.controller('commentController', function($scope, $location, $routeParams, $resource, lectureModel) {
   var lecture, name;
   lecture = $routeParams.lectureId;
   name = $routeParams.lectureName;
   $scope.name = name;
-  lectureModel.comments(lecture, function(l) {
+  lectureModel.comments($resource, lecture, function(l) {
     return $scope.comments = l;
   });
   return $scope.addComment = function() {

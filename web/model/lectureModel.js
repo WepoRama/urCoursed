@@ -1,6 +1,6 @@
-var comments;
+var commentses;
 
-comments = [
+commentses = [
   {
     comment: 'comment',
     author: 'me'
@@ -34,12 +34,13 @@ uLecture.service('lectureModel', function() {
       }
     ]);
   };
-  this.comments = function(lecture, store) {
-    return store(comments);
+  this.comments = function($resource, lecture, store) {
+    var Comments, comments;
+    Comments = $resource('http://chattycat2-haralkar.dotcloud.com/api/comments');
+    return comments = Comments.get({}, function() {
+      return comments.$save;
+    });
     /*
-            Comments = $resource 'http://chattycat2-haralkar.dotcloud.com/api/comments'
-            comments = Comments.get {}, () ->
-                comments.$save
     */
   };
   return this.addComment = function(comment) {

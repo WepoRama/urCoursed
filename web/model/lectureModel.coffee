@@ -1,4 +1,4 @@
-comments= [ {
+commentses= [ {
         comment: 'comment'
         author: 'me'
     }
@@ -32,13 +32,13 @@ uLecture.service 'lectureModel', () ->
                 author: 'me'
             }
         ]
-    @comments = (lecture, store) ->
+    @comments = ($resource, lecture, store) ->
         #ignore lecture for now
-        store comments
-        ###
+        #store commentses
         Comments = $resource 'http://chattycat2-haralkar.dotcloud.com/api/comments'
         comments = Comments.get {}, () ->
             comments.$save
+        ###
         ###
     @addComment = ( comment ) ->
         comment.author = 'me'

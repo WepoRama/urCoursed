@@ -1,7 +1,5 @@
 var uLecture, uLectureConfig;
 
-window.localStorage.setItem('history', JSON.stringify([]));
-
 uLectureConfig = function($routeProvider) {
   $routeProvider.when('//', {
     controller: 'lectureController',
@@ -22,6 +20,6 @@ uLectureConfig = function($routeProvider) {
   return 1;
 };
 
-uLecture = angular.module('uLecture', []).config(uLectureConfig);
+uLecture = angular.module('uLecture', ['ngResource']).config(uLectureConfig);
 
 1;

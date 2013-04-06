@@ -14,11 +14,11 @@ uLecture.controller 'lectureController',
             $location.path('/manageLectures/')
         1
 uLecture.controller 'commentController',
-    ($scope, $location, $routeParams,lectureModel) ->
+    ($scope, $location, $routeParams,$resource, lectureModel) ->
        lecture = $routeParams.lectureId
        name = $routeParams.lectureName
        $scope.name = name
-       lectureModel.comments lecture, (l) -> $scope.comments = l
+       lectureModel.comments $resource, lecture, (l) -> $scope.comments = l
        $scope.addComment = () ->
             lectureModel.addComment
                 comment: $scope.comment
