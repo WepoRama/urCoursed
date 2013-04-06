@@ -15,7 +15,12 @@ uLecture.service('lectureModel', function() {
     return store('nickses');
   };
   this.lectures = function(store) {
-    return store([
+    /*
+            Lecture = $resource 'http://chattycat2-haralkar.dotcloud.com/api/lectures'
+            lecture = Lecture.get {}, () ->
+                lecture.stuff = 1
+                lecture.$save
+    */    return store([
       {
         id: 1,
         url: '/url/is/not',
@@ -31,6 +36,11 @@ uLecture.service('lectureModel', function() {
   };
   this.comments = function(lecture, store) {
     return store(comments);
+    /*
+            Comments = $resource 'http://chattycat2-haralkar.dotcloud.com/api/comments'
+            comments = Comments.get {}, () ->
+                comments.$save
+    */
   };
   return this.addComment = function(comment) {
     comment.author = 'me';

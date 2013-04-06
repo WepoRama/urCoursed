@@ -3,7 +3,13 @@ var uLecture, uLectureConfig;
 window.localStorage.setItem('history', JSON.stringify([]));
 
 uLectureConfig = function($routeProvider) {
-  $routeProvider.when('', {
+  $routeProvider.when('//', {
+    controller: 'lectureController',
+    templateUrl: 'view/lecture.html'
+  }).when('', {
+    controller: 'lectureController',
+    templateUrl: 'view/lecture.html'
+  }).when('/lectures/', {
     controller: 'lectureController',
     templateUrl: 'view/lecture.html'
   }).when('/add', {

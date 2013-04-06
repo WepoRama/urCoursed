@@ -2,7 +2,13 @@ window.localStorage.setItem 'history', JSON.stringify([])
 
 uLectureConfig = ($routeProvider) ->
     $routeProvider
+        .when '//'
+            controller: 'lectureController'
+            templateUrl: 'view/lecture.html'
         .when ''
+            controller: 'lectureController'
+            templateUrl: 'view/lecture.html'
+        .when '/lectures/'
             controller: 'lectureController'
             templateUrl: 'view/lecture.html'
         .when '/add'
