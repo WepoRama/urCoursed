@@ -1,11 +1,11 @@
-/* Express quick setup */
+#/* Express quick setup */
 
 restify = require('restify')
-express = require('express')
-app = express()
+#express = require('express')
+#app = express()
 
-/* mongodb setup */
-mongo = require('mongodb')
+#/* mongodb setup */
+#mongo = require('mongodb')
 
 host = process.env['DOTCLOUD_DB_MONGODB_HOST'] || 'localhost'
 port = process.env['DOTCLOUD_DB_MONGODB_PORT'] ||  27017
@@ -13,8 +13,8 @@ port = parseInt(port)
 user = process.env['DOTCLOUD_DB_MONGODB_LOGIN'] || undefined
 pass = process.env['DOTCLOUD_DB_MONGODB_PASSWORD'] || undefined
 
-mongoServer = new mongo.Server(host, port, {})
-db = new mongo.Db("test", mongoServer, {auto_reconnect:true,w:'majority'})
+#mongoServer = new mongo.Server(host, port, {})
+#db = new mongo.Db("test", mongoServer, {auto_reconnect:true,w:'majority'})
 
 
 server = restify.createServer
@@ -23,6 +23,7 @@ server = restify.createServer
 server.use restify.acceptParser(server.acceptable)
 server.use restify.queryParser()
 server.use restify.bodyParser()
+server.use restify.jsonp()
 
 comments = [
     {text: 'fine this one', author: 'him'}
@@ -38,23 +39,24 @@ lectures = [
     {url: 'fine_this_four', author: 'us'}
 ]
 
-db.open((err)->{
-    if(err) console.log(err)
-
-    if(user && pass) {
-        db.authenticate(user, pass, (err)->{
-        })
-    }
-    else {
-    }
-})
-
+server.get '/api/dbstatus/',  (req, res, next) ->
+  console.log('checking status')
+  res.send comments:comments
+  next()
+    
 server.get '/api/lectures/',  (req, res, next) ->
-  res.send lectures
+  console.log('Reading lectures')
+  res.send data: lectures
   next()
 server.get '/api/comments/',  (req, res, next) ->
-  res.send comments
+  console.log 'Reading comments'
+  console.log comments
+  res.send data: comments
   next()
+
+server.get(/\/web\/?.*/, restify.serveStatic({
+  directory: './public'
+  }))
 
 server.listen 8080, () ->
   console.log '%s listening at %s', server.name, server.url

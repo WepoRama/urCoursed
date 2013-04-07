@@ -12,12 +12,11 @@ uLecture.service 'lectureModel', () ->
     this.nickName = (store) ->
         store 'nickses'
     this.lectures = (store) ->
-        ###
-        Lecture = $resource 'http://chattycat2-haralkar.dotcloud.com/api/lectures'
+        Lecture = $resource '/api/lectures'
         lecture = Lecture.get {}, () ->
             lecture.stuff = 1
             lecture.$save
-        ###
+    this.lecturesNevermind = (store) ->
         store [
             {
                 id: 1
@@ -33,13 +32,18 @@ uLecture.service 'lectureModel', () ->
             }
         ]
     @comments = ($resource, lecture, store) ->
+        #store comments
         #ignore lecture for now
         #store commentses
-        Comments = $resource 'http://chattycat2-haralkar.dotcloud.com/api/comments'
-        comments = Comments.get {}, () ->
+        #Comments = $resource 'http://crested-haralkar.dotcloud.com/api/comments',
+        # ##
+        Comments = $resource '/api/comments' ,
+            {alt: 'json', callback: 'JSON_CALLBACK'},
+            {query: {method: 'JSONP'}}
+        comments = Comments.query {}, () ->
+            comments.stuff = true
             comments.$save
-        ###
-        ###
+        # ##
     @addComment = ( comment ) ->
         comment.author = 'me'
         comments.push comment

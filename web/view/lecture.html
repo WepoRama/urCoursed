@@ -1,5 +1,15 @@
+Lecture list:
 <ul>
     <li ng-repeat='lecture in lectures'>
     <a href='{{lecture.url}}'>{{lecture.name}}</a> owner: {{lecture.author}}
     Discussion: <a href='#/comments/{{lecture.id}}/{{lecture.name}}'>{{lecture.name}}</a> 
 </ul>
+
+<div class='addLecture' ng-show="isTeacher()">
+    <form name='newLecture'>
+        <label for='addLecture'>New lecture</label>
+        <input id='LectureURL' ng-model='url'></input>
+        <input id='LectureName' ng-model='name'></input>
+        <button ng-click='addLecture()'>Add Lecture </button>
+    </form>
+</div>
