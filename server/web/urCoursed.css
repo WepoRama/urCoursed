@@ -96,6 +96,7 @@ h1
     #reynir
     {
         background: url('ICUReynir.jpg');
+        background-repeat:no-repeat;
         width: 440px;
     }
 }
