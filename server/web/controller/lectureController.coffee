@@ -2,10 +2,7 @@
 uLecture.controller 'lectureController',
     ($scope, $location, $routeParams,lectureModel) ->
         #$scope.$apply () -> $scope.nick = l
-        #$scope.nick = lectureModel.nickName ()->
-        #lectureModel.nickName (l) -> $scope.nick = l
-        #lectureModel.lectures $resource, (l) -> $scope.lectures = l
-        lectureModel.lectures (l) -> $scope.lectures = l
+        $scope.lectures = lectureModel.lectures 1
 
         $scope.addLecture = () ->
             lectureModel.addLecture

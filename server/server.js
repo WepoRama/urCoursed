@@ -45,15 +45,19 @@ comments = [
 lectures = [
   {
     url: 'fine_this_one',
+    name: 'one',
     author: 'us'
   }, {
     url: 'fine_this_two',
+    name: 'two',
     author: 'us'
   }, {
     url: 'fine_this_tree',
+    name: 'three',
     author: 'us'
   }, {
     url: 'fine_this_four',
+    name: 'four',
     author: 'us'
   }
 ];
@@ -66,16 +70,18 @@ server.get('/api/dbstatus/', function(req, res, next) {
   return next();
 });
 
-server.get('/api/lectures/', function(req, res, next) {
-  console.log('Reading lectures');
+server.get('/api/lectures/:course', function(req, res, next) {
+  console.log('Reading lectures:');
+  console.log(lectures);
   res.send({
     data: lectures
   });
   return next();
 });
 
-server.get('/api/comments/', function(req, res, next) {
+server.get('/api/comments/:lecture', function(req, res, next) {
   console.log('Reading comments');
+  console.log(req.params.lecture);
   console.log(comments);
   res.send({
     data: comments

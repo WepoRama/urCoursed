@@ -33,10 +33,10 @@ comments = [
 ]
 
 lectures = [
-    {url: 'fine_this_one', author: 'us'}
-    {url: 'fine_this_two', author: 'us'}
-    {url: 'fine_this_tree', author: 'us'}
-    {url: 'fine_this_four', author: 'us'}
+    {url: 'fine_this_one', name: 'one', author: 'us'}
+    {url: 'fine_this_two', name: 'two', author: 'us'}
+    {url: 'fine_this_tree',name: 'three',  author: 'us'}
+    {url: 'fine_this_four',name: 'four',  author: 'us'}
 ]
 
 server.get '/api/dbstatus/',  (req, res, next) ->
@@ -44,12 +44,15 @@ server.get '/api/dbstatus/',  (req, res, next) ->
   res.send comments:comments
   next()
     
-server.get '/api/lectures/',  (req, res, next) ->
-  console.log('Reading lectures')
+server.get '/api/lectures/:course',  (req, res, next) ->
+  #there can be only one course, ignore course
+  console.log('Reading lectures:')
+  console.log lectures
   res.send data: lectures
   next()
-server.get '/api/comments/',  (req, res, next) ->
+server.get '/api/comments/:lecture',  (req, res, next) ->
   console.log 'Reading comments'
+  console.log req.params.lecture
   console.log comments
   res.send data: comments
   next()
