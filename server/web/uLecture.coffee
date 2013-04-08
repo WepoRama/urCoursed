@@ -1,24 +1,24 @@
-window.localStorage.setItem 'history', JSON.stringify([])
+#window.localStorage.setItem 'history', JSON.stringify([])
 
 uLectureConfig = ($routeProvider) ->
     $routeProvider
-        .when '//'
+        .when '//',
             controller: 'lectureController'
             templateUrl: 'view/lecture.html'
-        .when ''
+        .when '',
             controller: 'lectureController'
             templateUrl: 'view/lecture.html'
-        .when '/lectures/'
+        .when '/lectures/',
             controller: 'lectureController'
             templateUrl: 'view/lecture.html'
-        .when '/add'
+        .when '/add',
             controller: 'addController'
             templateUrl: 'view/add.html'
-        .when '/comments/:lectureId/:lectureName'
+        .when '/comments/:lectureId/:lectureName',
             controller: 'commentController'
             templateUrl: 'view/comments.html'
     1
         
-uLecture = angular.module('uLecture', []).
+uLecture = angular.module('uLecture', ['ngResource']).
     config( uLectureConfig )
 1

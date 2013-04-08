@@ -5,8 +5,5 @@ rest:
         app: node server.js
     config:
         node_version: v0.8.x
-web:
-    type: static
-    approot: web
 db:
     type: mongodb

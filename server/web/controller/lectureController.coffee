@@ -2,10 +2,7 @@
 uLecture.controller 'lectureController',
     ($scope, $location, $routeParams,lectureModel) ->
         #$scope.$apply () -> $scope.nick = l
-        #$scope.nick = lectureModel.nickName ()->
-        #lectureModel.nickName (l) -> $scope.nick = l
-        #lectureModel.lectures $resource, (l) -> $scope.lectures = l
-        lectureModel.lectures (l) -> $scope.lectures = l
+        $scope.lectures = lectureModel.lectures 1
 
         $scope.addLecture = () ->
             lectureModel.addLecture
@@ -14,11 +11,13 @@ uLecture.controller 'lectureController',
             $location.path('/manageLectures/')
         1
 uLecture.controller 'commentController',
-    ($scope, $location, $routeParams,lectureModel) ->
+    ($scope, $location, $routeParams,$resource, lectureModel) ->
        lecture = $routeParams.lectureId
        name = $routeParams.lectureName
+       $scope.isTeacher = () -> true
        $scope.name = name
-       lectureModel.comments lecture, (l) -> $scope.comments = l
+       #$scope.comments = lectureModel.comments $resource, lecture, (l) -> #$scope.comments = l
+       $scope.comments = lectureModel.comments lecture
        $scope.addComment = () ->
             lectureModel.addComment
                 comment: $scope.comment

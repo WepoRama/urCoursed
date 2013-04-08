@@ -1,11 +1,11 @@
-/* Express quick setup */
+#/* Express quick setup */
 
 restify = require('restify')
-express = require('express')
-app = express()
+#express = require('express')
+#app = express()
 
-/* mongodb setup */
-mongo = require('mongodb')
+#/* mongodb setup */
+#mongo = require('mongodb')
 
 host = process.env['DOTCLOUD_DB_MONGODB_HOST'] || 'localhost'
 port = process.env['DOTCLOUD_DB_MONGODB_PORT'] ||  27017
@@ -13,8 +13,8 @@ port = parseInt(port)
 user = process.env['DOTCLOUD_DB_MONGODB_LOGIN'] || undefined
 pass = process.env['DOTCLOUD_DB_MONGODB_PASSWORD'] || undefined
 
-mongoServer = new mongo.Server(host, port, {})
-db = new mongo.Db("test", mongoServer, {auto_reconnect:true,w:'majority'})
+#mongoServer = new mongo.Server(host, port, {})
+#db = new mongo.Db("test", mongoServer, {auto_reconnect:true,w:'majority'})
 
 
 server = restify.createServer
@@ -23,6 +23,7 @@ server = restify.createServer
 server.use restify.acceptParser(server.acceptable)
 server.use restify.queryParser()
 server.use restify.bodyParser()
+server.use restify.jsonp()
 
 comments = [
     {text: 'fine this one', author: 'him'}
@@ -32,29 +33,38 @@ comments = [
 ]
 
 lectures = [
-    {url: 'fine_this_one', author: 'us'}
-    {url: 'fine_this_two', author: 'us'}
-    {url: 'fine_this_tree', author: 'us'}
-    {url: 'fine_this_four', author: 'us'}
+    {url: 'fine_this_one', name: 'one', author: 'us'}
+    {url: 'fine_this_two', name: 'two', author: 'us'}
+    {url: 'fine_this_tree',name: 'three',  author: 'us'}
+    {url: 'fine_this_four',name: 'four',  author: 'us'}
 ]
 
-db.open((err)->{
-    if(err) console.log(err)
-
-    if(user && pass) {
-        db.authenticate(user, pass, (err)->{
-        })
-    }
-    else {
-    }
-})
-
-server.get '/api/lectures/',  (req, res, next) ->
-  res.send lectures
+server.get '/api/dbstatus/',  (req, res, next) ->
+  console.log('checking status')
+  res.send comments:comments
   next()
-server.get '/api/comments/',  (req, res, next) ->
-  res.send comments
+    
+server.get '/api/lectures/:course',  (req, res, next) ->
+  #there can be only one course, ignore course
+  console.log('Reading lectures:')
+  console.log lectures
+  res.send data: lectures
   next()
+server.get '/api/comments/:lecture',  (req, res, next) ->
+  console.log 'Reading comments'
+  console.log req.params.lecture
+  console.log comments
+  res.send data: comments
+  next()
+
+###
+server.get(//, restify.serveStatic({
+  directory: './public/web'
+  }))
+###
+server.get(/\/web\/?.*/, restify.serveStatic({
+  directory: '.'
+  }))
 
 server.listen 8080, () ->
   console.log '%s listening at %s', server.name, server.url

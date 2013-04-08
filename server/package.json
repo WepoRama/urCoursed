@@ -1,0 +1,8 @@
+{
+  "name": "urCoursed",
+  "version": "1.0.0",
+  "dependencies": {
+    "restify": "",
+    "mongodb": ""
+  }
+}
