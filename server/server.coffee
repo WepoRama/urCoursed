@@ -60,7 +60,7 @@ server.get(//, restify.serveStatic({
   }))
 ###
 server.get(/\/web\/?.*/, restify.serveStatic({
-  directory: './public'
+  directory: '../'
   }))
 
 server.listen 8080, () ->
