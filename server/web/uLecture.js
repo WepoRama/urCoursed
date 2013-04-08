@@ -12,7 +12,7 @@ uLectureConfig = function($routeProvider) {
     controller: 'lectureController',
     templateUrl: 'view/lecture.html'
   }).when('/add', {
-    controller: 'addController',
+    controller: 'lectureController',
     templateUrl: 'view/add.html'
   }).when('/comments/:lectureId/:lectureName', {
     controller: 'commentController',

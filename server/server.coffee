@@ -56,12 +56,26 @@ server.get '/api/comments/:lecture',  (req, res, next) ->
   console.log comments
   res.send data: comments
   next()
+server.post '/api/comments/:lecture',  (req, res, next) ->
+  console.log 'Putting lecture in'
+  console.log req
+  #console.log
+  next()
+server.get '/api/lectures/:lecture/comment/:comment',  (req, res, next) ->
+  console.log 'Putting lecture in'
+  console.log req
+  if not req.params.req
+    res.send data:comments
+  else
+    res.send data:comments[req.params.req]
+  #console.log
+  next()
+server.post '/api/lectures/:lecture/comment',  (req, res, next) ->
+  console.log 'Putting lecture in'
+  console.log req
+  #console.log
+  next()
 
-###
-server.get(//, restify.serveStatic({
-  directory: './public/web'
-  }))
-###
 server.get(/\/web\/?.*/, restify.serveStatic({
   directory: '.'
   }))

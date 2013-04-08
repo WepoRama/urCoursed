@@ -89,12 +89,32 @@ server.get('/api/comments/:lecture', function(req, res, next) {
   return next();
 });
 
-/*
-server.get(//, restify.serveStatic({
-  directory: './public/web'
-  }))
-*/
+server.post('/api/comments/:lecture', function(req, res, next) {
+  console.log('Putting lecture in');
+  console.log(req);
+  return next();
+});
 
+server.get('/api/lectures/:lecture/comment/:comment', function(req, res, next) {
+  console.log('Putting lecture in');
+  console.log(req);
+  if (!req.params.req) {
+    res.send({
+      data: comments
+    });
+  } else {
+    res.send({
+      data: comments[req.params.req]
+    });
+  }
+  return next();
+});
+
+server.post('/api/lectures/:lecture/comment', function(req, res, next) {
+  console.log('Putting lecture in');
+  console.log(req);
+  return next();
+});
 
 server.get(/\/web\/?.*/, restify.serveStatic({
   directory: '.'
