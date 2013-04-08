@@ -11,7 +11,18 @@ commentses = [
   }
 ];
 
-uLecture.service('lectureModel', function() {
+uLecture.service('lectureModel', function($resource) {
+  var Comments;
+
+  Comments = $resource('/api/:resource', {
+    resource: '@resource',
+    alt: 'json',
+    callback: 'JSON_CALLBACK'
+  }, {
+    query: {
+      method: 'JSONP'
+    }
+  });
   this.nickName = function(store) {
     return store('nickses');
   };
@@ -39,18 +50,18 @@ uLecture.service('lectureModel', function() {
       }
     ]);
   };
-  this.comments = function($resource, lecture, store) {
-    var Comments, comments;
+  this.comments = function(lecture, store) {
+    /*
+    Comments = $resource '/api/comments' ,
+        {alt: 'json', callback: 'JSON_CALLBACK'},
+        {query: {method: 'JSONP'}}
+    */
 
-    Comments = $resource('/api/comments', {
-      alt: 'json',
-      callback: 'JSON_CALLBACK'
-    }, {
-      query: {
-        method: 'JSONP'
-      }
-    });
-    return comments = Comments.query({}, function() {
+    var comments;
+
+    return comments = Comments.query({
+      resource: 'comments'
+    }, function() {
       comments.stuff = true;
       return comments.$save;
     });

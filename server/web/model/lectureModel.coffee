@@ -8,7 +8,10 @@ commentses= [ {
     }
 ]
 
-uLecture.service 'lectureModel', () ->
+uLecture.service 'lectureModel', ($resource) ->
+    Comments = $resource '/api/:resource' ,
+        {resource: '@resource', alt: 'json', callback: 'JSON_CALLBACK'},
+        {query: {method: 'JSONP'}}
     this.nickName = (store) ->
         store 'nickses'
     this.lectures = (store) ->
@@ -31,16 +34,17 @@ uLecture.service 'lectureModel', () ->
                 author: 'me'
             }
         ]
-    @comments = ($resource, lecture, store) ->
+    @comments = (lecture, store) ->
         #store comments
         #ignore lecture for now
         #store commentses
         #Comments = $resource 'http://crested-haralkar.dotcloud.com/api/comments',
-        # ##
+        ###
         Comments = $resource '/api/comments' ,
             {alt: 'json', callback: 'JSON_CALLBACK'},
             {query: {method: 'JSONP'}}
-        comments = Comments.query {}, () ->
+        ###
+        comments = Comments.query {resource: 'comments'}, () ->
             comments.stuff = true
             comments.$save
         # ##

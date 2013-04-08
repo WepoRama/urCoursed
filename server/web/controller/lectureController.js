@@ -22,7 +22,7 @@ uLecture.controller('commentController', function($scope, $location, $routeParam
     return true;
   };
   $scope.name = name;
-  $scope.comments = lectureModel.comments($resource, lecture);
+  $scope.comments = lectureModel.comments(lecture);
   return $scope.addComment = function() {
     lectureModel.addComment({
       comment: $scope.comment
