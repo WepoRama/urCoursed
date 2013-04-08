@@ -5,7 +5,7 @@ restify = require('restify')
 #app = express()
 
 #/* mongodb setup */
-mongo = require('mongodb')
+#mongo = require('mongodb')
 
 host = process.env['DOTCLOUD_DB_MONGODB_HOST'] || 'localhost'
 port = process.env['DOTCLOUD_DB_MONGODB_PORT'] ||  27017
@@ -13,8 +13,8 @@ port = parseInt(port)
 user = process.env['DOTCLOUD_DB_MONGODB_LOGIN'] || undefined
 pass = process.env['DOTCLOUD_DB_MONGODB_PASSWORD'] || undefined
 
-mongoServer = new mongo.Server(host, port, {})
-db = new mongo.Db("test", mongoServer, {auto_reconnect:true,w:'majority'})
+#mongoServer = new mongo.Server(host, port, {})
+#db = new mongo.Db("test", mongoServer, {auto_reconnect:true,w:'majority'})
 
 
 server = restify.createServer
@@ -54,6 +54,11 @@ server.get '/api/comments/',  (req, res, next) ->
   res.send data: comments
   next()
 
+###
+server.get(//, restify.serveStatic({
+  directory: './public/web'
+  }))
+###
 server.get(/\/web\/?.*/, restify.serveStatic({
   directory: './public'
   }))
