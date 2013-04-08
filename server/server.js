@@ -95,7 +95,7 @@ server.post('/api/comments/:lecture', function(req, res, next) {
   return next();
 });
 
-server.get('/api/lectures/:lecture/comment/:comment', function(req, res, next) {
+server.get('/api/lecture/:lecture/comment/:comment', function(req, res, next) {
   console.log('Putting lecture in');
   console.log(req);
   if (!req.params.req) {
@@ -110,7 +110,7 @@ server.get('/api/lectures/:lecture/comment/:comment', function(req, res, next) {
   return next();
 });
 
-server.post('/api/lectures/:lecture/comment', function(req, res, next) {
+server.post('/api/lecture/:lecture/comment/:comment', function(req, res, next) {
   console.log('Putting lecture in');
   console.log(req);
   return next();

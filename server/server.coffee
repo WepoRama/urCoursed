@@ -61,7 +61,8 @@ server.post '/api/comments/:lecture',  (req, res, next) ->
   console.log req
   #console.log
   next()
-server.get '/api/lectures/:lecture/comment/:comment',  (req, res, next) ->
+
+server.get '/api/lecture/:lecture/comment/:comment',  (req, res, next) ->
   console.log 'Putting lecture in'
   console.log req
   if not req.params.req
@@ -70,7 +71,7 @@ server.get '/api/lectures/:lecture/comment/:comment',  (req, res, next) ->
     res.send data:comments[req.params.req]
   #console.log
   next()
-server.post '/api/lectures/:lecture/comment',  (req, res, next) ->
+server.post '/api/lecture/:lecture/comment/:comment',  (req, res, next) ->
   console.log 'Putting lecture in'
   console.log req
   #console.log
