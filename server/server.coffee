@@ -39,9 +39,15 @@ lectures = [
     {url: 'fine_this_four',name: 'four',  author: 'us'}
 ]
 
+server.get '/api/',  (req, res, next) ->
+  console.log 'api call'
+  res.send api: ['dbstatus', 'lectures', 'lecture', 'comments']
+  next()
 server.get '/api/dbstatus/',  (req, res, next) ->
   console.log('checking status')
-  res.send comments:comments
+  res.send
+    status: 'static'
+    detail: 'no database connected'
   next()
     
 server.get '/api/lectures/:course',  (req, res, next) ->
@@ -62,15 +68,19 @@ server.post '/api/comments/:lecture',  (req, res, next) ->
   #console.log
   next()
 
-server.get '/api/lecture/:lecture/comment/:comment',  (req, res, next) ->
+serveComments = (req, res, next) ->
   console.log 'Putting lecture in'
-  console.log req
-  if not req.params.req
+  console.log req.params
+  if not req.params.comment
     res.send data:comments
   else
-    res.send data:comments[req.params.req]
+    res.send data:comments[req.params.comment]
   #console.log
   next()
+server.get '/api/lecture/:lecture/comment',  serveComments
+server.get '/api/lecture/:lecture/comment/:comment', serveComments
+
+
 server.post '/api/lecture/:lecture/comment/:comment',  (req, res, next) ->
   console.log 'Putting lecture in'
   console.log req
