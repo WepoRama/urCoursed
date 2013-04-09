@@ -4,70 +4,15 @@ body
 	margin: 15px 0px 0px 15px;
     padding: 5px 10px 5px 10px;
 }
-.rightbox
-{
-	margin: 15px;
-	padding-top: 15px;
-	padding-left: 15px;
-    border: 1px solid black;
-    border-radius: 7px;
-    box-shadow: 5px 5px 3px #888888;
-    min-height: 50px;
-    width: 300px;
-    position: absolute;
-    right: 400px;
-    top: 330px;
-}
-.leftbox
-{
-    position: absolute;
-    top: 330px;
-	margin: 15px;
-	padding-top: 15px;
-	padding-left: 15px;
-    border: 1px solid black;
-    border-radius: 7px;
-    box-shadow: 5px 5px 3px #888888;
-    min-height: 50px;
-    width: 600px;
-}
 
-.boxed
+#GMIOY
 {
-	margin: 15px;
-	padding-top: 15px;
-	padding-left: 15px;
-	padding-bottom: 15px;
-    border: 1px solid black;
-    border-radius: 7px;
-    box-shadow: 5px 5px 3px #888888;
-    min-height: 150px;
-    width: 950px;
+    display:none;
 }
-input
+#message
 {
-	font:  14px bold;
-	padding-left: 5px;
-	height: 20px;
-	width: 120px;
-	margin-bottom: 1px;
-	border: 1px solid black;
-    border-radius: 4px;
+   display:none;
 }
-button
-{
-	color: #ffffff;
-	background-image: url('reynir.jpg');
-	font:  14px bold ;
-	padding-left: 5px;
-	height: 25px;
-	width: 120px;
-	margin-bottom: 1px;
-	border: 1px solid black;
-    border-radius: 7px;
-    box-shadow: 5px 5px 3px #888888;
-}
-
 h1
 {
 	color: #ffffff;
@@ -75,28 +20,69 @@ h1
 	font-size: 50px;
 	padding-left: 5px;
 	text-shadow: 3px 3px #333333;
-	width: 990px;
-	margin-bottom: 1px;
+	margin-bottom: 3px;
 	border: 1px solid black;
     border-radius: 7px;
     box-shadow: 5px 5px 3px #888888;
+    min-width:750px;
 }
-#reynir
+#logo
 {
     float: left;
     color:#f00;
-    height:650px;
-    width:930px;
+    width:344px;
+    height:258px;
     padding:5px 10px;
     background-image: url('reynir.jpg');
     background-repeat: no-repeat;
 }
-@media only screen and (max-device-width: 480px)
+#navigation
 {
-    #reynir
+    float:right;
+    list-style:none;
+    padding-left: 0;
+    border:5px solid fuchsia;
+}
+#navigation li
+{
+    float: left;
+    padding: 4px 5px;
+}
+#clear
+{
+    clear:both;
+}
+@media only screen and (max-device-width: 720px)
+{
+    #logo
     {
         background: url('ICUReynir.jpg');
         background-repeat:no-repeat;
         width: 440px;
+        color:#ffffff;
+    }
+    h1
+    {
+	    color: #fff;
+	    background-image: url('beans.jpeg');
+	    font-size: 30px;
+	    text-shadow: 2px 2px #333333;
+        border-radius: 3px;
+        box-shadow: 2px 2px 1px;
+    }
+    #message
+    {
+        display:block;
+    }
+    #GMIOY
+    {
+        display:block;
+        color:#fff;
+        font-size:15px;
+        font-weight:bold;
+    }
+    #ILTW
+    {
+        display:none;
     }
 }
