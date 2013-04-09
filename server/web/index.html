@@ -1,5 +1,8 @@
 <!DOCTYPE html> <html ng-app='uLecture'>
     <head>
+<script type='text/javascript' src='jQuery.js'></script>
+<script type='text/javascript' src='protoFluid3.02.js'></script>
+<script type='text/javascript' src='yourCode.js'></script>
         <!--script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script-->
         <script src="js/angular.min.js"></script>
         <script src="js/angular-resource.js"></script>
@@ -11,12 +14,23 @@
     </head>
 <body>
     <h1> Courses on you! </h1>
-    <div id="mobile-indicator">Þetta er 1</div>
+    <div id="message">Kve&ethja til Reynis, takk fyrir hj&aacutelpina &aacute facebook!</div>
     <!-- a href="#/login/">New handle</a> <a href="#/chatsAvailabe/">Chats available</a -->
-    <div id="reynir">I like to watch!</div>
-    <ul id="navigation"><li> <a href="#/lectures">Lectures</a></ul>
-    <div style="clear:both">...</div>
-    <div ng-view>
+    <div id="logo">
+        <p id="ILTW">I like to watch!</p>
+        <p id="GMIOY">I got my I on You!</p>
     </div>
+    <ul id="navigation">
+        <li>
+            <a href>Home</a>
+        </li>
+        <li>
+            <a href>Lectures</a>
+        </li>
+    </ul>
+    <div id="clear">
+        <div ng-view></div>
+    </div>
+    
 </body>
 </html>
