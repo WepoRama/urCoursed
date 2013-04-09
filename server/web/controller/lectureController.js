@@ -23,15 +23,19 @@ uLecture.controller('commentController', function($scope, $location, $routeParam
   $scope.comments = lectureModel.commentCRUD(lecture);
   $scope.addComment = function() {
     $scope.comments = lectureModel.addComment(lecture, $scope.comment);
+    name = name + 'f';
     return $location.path('/comments/' + lecture + '/' + name);
   };
   return 1;
 });
 
-/*
-uLecture.controller 'addLectureController',
-    ($scope, $location, $routeParams,lectureModel) ->
-       lecture = $routeParams.lectureId
-       lectureModel.comments lecture, (l) -> $scope.comments = l
-*/
+uLecture.controller('addLectureController', function($scope, $location, $routeParams, lectureModel) {
+  var name, url;
 
+  name = $routeParams.name;
+  url = $routeParams.url;
+  return lectureModel.addLecture({
+    name: name,
+    url: url
+  });
+});

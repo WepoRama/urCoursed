@@ -16,27 +16,29 @@ uLecture.service 'lectureModel', ($resource) ->
         }, {
             add: {method: 'POST'}
         }
+    Lecture = $resource '/api/lecture/:lecture',
+        lecture: '@lecture'
 
     @lectures = (course) ->
         lecture = Lists.query {
                 resource: 'lectures'
                 detail: course
-            }, () -> lecture.$save
+            }, () -> lecture.$save()
     @comments = (lecture, store) ->
         comments = Lists.query {
             resource: 'comments'
             detail: lecture
-        }, () -> comments.$save
+        }, () -> comments.$save()
     @commentCRUD = ( lecture, comment ) ->
         #comments = LectureComments.get { lecture: lecture , comment: comment}, ()->
         comments = LectureComments.get { lecture: lecture }, ()->
-            comments.$save
+            comments.$save()
     @addComment = ( data ) ->
-        stuff = new LectureComments {lecture: 'newComm' }
-        stuff.newComment =
-            author: 'me'
-            text: 'stuff'
-        stuff.$save
+        stuff = LectureComments.save {lecture: 'newComm' },
+            #stuff.newComment =
+            data: {author: 'me'
+            text: 'stuff'}, ()->
+                stuff.$save()
         #data.promise.data.push { text: data.newComment author: 'me'}
         #comments = LectureComments.get { lecture: lecture }, ()-> comments.newComment = data.newComment; comments.$save
     @addCommentSingle = ( data ) ->
@@ -47,6 +49,9 @@ uLecture.service 'lectureModel', ($resource) ->
         data.promise.get()
         1
     1
+    @addLecture = (data) ->
+        lecture = new Lecture {data}
+        lecture.$save()
             
         #comments.push comment
     ###

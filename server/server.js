@@ -45,21 +45,15 @@
 
   lectures = [
     {
-      url: 'fine_this_one',
+      url: 'http://www.youtube.com/watch?v=WuiHuZq_cg4',
       name: 'one',
-      author: 'us'
+      author: 'us',
+      id: 1
     }, {
-      url: 'fine_this_two',
+      url: 'http://www.youtube.com/watch?v=1OALSkJGsRw',
       name: 'two',
-      author: 'us'
-    }, {
-      url: 'fine_this_tree',
-      name: 'three',
-      author: 'us'
-    }, {
-      url: 'fine_this_four',
-      name: 'four',
-      author: 'us'
+      author: 'us',
+      id: 2
     }
   ];
 
@@ -150,7 +144,8 @@
   server.get('/api/lecture/:lecture', serveComments);
 
   logActivity = function(req, res, next) {
-    console.log('Putting comment in (alc)');
+    console.log('LOggin Actgivitiy comment in (alc)');
+    console.log(req);
     console.log(req.params);
     console.log(req.params.data);
     return res.send({

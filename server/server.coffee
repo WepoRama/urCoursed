@@ -33,10 +33,8 @@ comments = [
 ]
 
 lectures = [
-    {url: 'fine_this_one', name: 'one', author: 'us'}
-    {url: 'fine_this_two', name: 'two', author: 'us'}
-    {url: 'fine_this_tree',name: 'three',  author: 'us'}
-    {url: 'fine_this_four',name: 'four',  author: 'us'}
+    {url: 'http://www.youtube.com/watch?v=WuiHuZq_cg4', name: 'one', author: 'us', id: 1}
+    {url: 'http://www.youtube.com/watch?v=1OALSkJGsRw', name: 'two', author: 'us', id: 2}
 ]
 
 server.get '/api/',  (req, res, next) ->
@@ -99,13 +97,16 @@ server.post '/api/lecture/:lecture', saveComment
 server.get  '/api/lecture/:lecture',  serveComments
 
 logActivity = (req, res, next) ->
-  console.log 'Putting comment in (alc)'
+  console.log 'LOggin Actgivitiy comment in (alc)'
+  console.log req
   console.log req.params
   console.log req.params.data
   res.send data:comments
+
 server.put  '/api/lecture/', logActivity
 server.post '/api/lecture/', logActivity
 server.get  '/api/lecture/', logActivity
+
 server.put  '/api/lecture', logActivity
 server.post '/api/lecture', logActivity
 server.get  '/api/lecture', logActivity
