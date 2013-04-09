@@ -28,8 +28,8 @@ server.use restify.jsonp()
 comments = [
     {text: 'fine this one', author: 'him'}
     {text: 'fine this two', author: 'me'}
-    {text: 'fine this three', author: 'him'}
-    {text: 'fine this four', author: 'me'}
+    {text: 'fine this three', author: 'other'}
+    {text: 'fine this four', author: 'somebody'}
 ]
 
 lectures = [
@@ -69,9 +69,9 @@ server.post '/api/comments/:lecture',  (req, res, next) ->
   next()
 
 serveComments = (req, res, next) ->
-  console.log 'Putting lecture in'
+  console.log 'Serving comments for lecture'
   console.log req.params
-  if not req.params.comment
+  if not req.params.comment or req.params.comment == 'all'
     res.send data:comments
   else
     res.send data:comments[req.params.comment]
@@ -81,11 +81,15 @@ server.get '/api/lecture/:lecture/comment',  serveComments
 server.get '/api/lecture/:lecture/comment/:comment', serveComments
 
 
-server.post '/api/lecture/:lecture/comment/:comment',  (req, res, next) ->
-  console.log 'Putting lecture in'
-  console.log req
-  #console.log
+saveComment = (req, res, next) ->
+  console.log 'Putting comment in'
+  console.log req.params.data
+  comments.push req.param.data
+  console.log comments
+  res.send data:comments
   next()
+server.post '/api/lecture/:lecture/comment/:comment', saveComment
+server.put '/api/lecture/:lecture/comment/:comment', saveComment
 
 server.get(/\/web\/?.*/, restify.serveStatic({
   directory: '.'

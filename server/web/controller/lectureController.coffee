@@ -12,16 +12,20 @@ uLecture.controller 'lectureController',
         1
 uLecture.controller 'commentController',
     ($scope, $location, $routeParams,$resource, lectureModel) ->
-       lecture = $routeParams.lectureId
-       name = $routeParams.lectureName
-       $scope.isTeacher = () -> true
-       $scope.name = name
-       #$scope.comments = lectureModel.comments $resource, lecture, (l) -> #$scope.comments = l
-       $scope.comments = lectureModel.comments lecture
-       $scope.addComment = () ->
+        lecture = $routeParams.lectureId
+        name = $routeParams.lectureName
+        $scope.isTeacher = () -> true
+        $scope.name = name
+        #$scope.comments = lectureModel.comments $resource, lecture, (l) -> #$scope.comments = l
+        $scope.comments = lectureModel.commentCRUD lecture, 'all'
+        $scope.addComment = () ->
             lectureModel.addComment
-                comment: $scope.comment
+                promise: $scope.comments
+                newComment: $scope.comment
+                lecture: $routeParams.lectureId
             $location.path('/comments/'+lecture+'/'+name)
+        1
+
 ###
 uLecture.controller 'addLectureController',
     ($scope, $location, $routeParams,lectureModel) ->

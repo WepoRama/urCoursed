@@ -20,13 +20,16 @@ uLecture.controller('commentController', function($scope, $location, $routeParam
     return true;
   };
   $scope.name = name;
-  $scope.comments = lectureModel.comments(lecture);
-  return $scope.addComment = function() {
+  $scope.comments = lectureModel.commentCRUD(lecture, 'all');
+  $scope.addComment = function() {
     lectureModel.addComment({
-      comment: $scope.comment
+      promise: $scope.comments,
+      newComment: $scope.comment,
+      lecture: $routeParams.lectureId
     });
     return $location.path('/comments/' + lecture + '/' + name);
   };
+  return 1;
 });
 
 /*

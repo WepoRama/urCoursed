@@ -8,9 +8,13 @@ uLecture.service 'lectureModel', ($resource) ->
             callback: 'JSON_CALLBACK'
         },
         {query: {method: 'JSONP'}}
-    LectureComments = $resource '/api/lecture/:lecture/comment/:comment' ,
-        lecture: '@lecture'
-        comment: '@comment'
+    LectureComments = $resource '/api/lecture/:lecture/comment/:comment', {
+        #                        /api/lecture/1       /comment/1
+            lecture: '@lecture'
+            comment: '@comment'
+        }, {
+            add: {method: 'PUT'}
+        }
 
     @lectures = (course) ->
         lecture = Lists.query {
@@ -22,10 +26,18 @@ uLecture.service 'lectureModel', ($resource) ->
             resource: 'comments'
             detail: lecture
         }, () -> comments.$save
-    @addComment = ( lecture, comment ) ->
-        comments = LectureComments.get { lecture: lecture }, ()->
+    @commentCRUD = ( lecture, comment ) ->
+        comments = LectureComments.get { lecture: lecture , comment: comment}, ()->
             comments.comments.push comment
             comments.$save
+    @addComment = ( data ) ->
+        newComment = LectureComments.save { lecture: data.lecture, comment: 'new' }, {
+                data:{text: data.newComment
+                author: 'me'}
+        }, ()->
+            comments.data
+            comments.$save
+    1
             
         #comments.push comment
     ###
