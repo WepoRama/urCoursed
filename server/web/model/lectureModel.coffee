@@ -8,12 +8,13 @@ uLecture.service 'lectureModel', ($resource) ->
             callback: 'JSON_CALLBACK'
         },
         {query: {method: 'JSONP'}}
-    LectureComments = $resource '/api/lecture/:lecture/comment/:comment', {
+    #LectureComments = $resource '/api/lecture/:lecture/comment/:comment', {
+    LectureComments = $resource '/api/lecture/:lecture', {
         #                        /api/lecture/1       /comment/1
             lecture: '@lecture'
-            comment: '@comment'
+            #comment: '@comment'
         }, {
-            add: {method: 'PUT'}
+            add: {method: 'POST'}
         }
 
     @lectures = (course) ->
@@ -27,16 +28,24 @@ uLecture.service 'lectureModel', ($resource) ->
             detail: lecture
         }, () -> comments.$save
     @commentCRUD = ( lecture, comment ) ->
-        comments = LectureComments.get { lecture: lecture , comment: comment}, ()->
-            comments.comments.push comment
+        #comments = LectureComments.get { lecture: lecture , comment: comment}, ()->
+        comments = LectureComments.get { lecture: lecture }, ()->
             comments.$save
     @addComment = ( data ) ->
-        newComment = LectureComments.save { lecture: data.lecture, comment: 'new' }, {
+        stuff = new LectureComments {lecture: 'newComm' }
+        stuff.newComment =
+            author: 'me'
+            text: 'stuff'
+        stuff.$save
+        #data.promise.data.push { text: data.newComment author: 'me'}
+        #comments = LectureComments.get { lecture: lecture }, ()-> comments.newComment = data.newComment; comments.$save
+    @addCommentSingle = ( data ) ->
+        addComments = LectureComments.save
                 data:{text: data.newComment
-                author: 'me'}
-        }, ()->
-            comments.data
-            comments.$save
+                author: 'me'},
+                { lecture: lecture , comment: comment}, ()->
+        data.promise.get()
+        1
     1
             
         #comments.push comment

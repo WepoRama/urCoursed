@@ -17,12 +17,9 @@ uLecture.controller 'commentController',
         $scope.isTeacher = () -> true
         $scope.name = name
         #$scope.comments = lectureModel.comments $resource, lecture, (l) -> #$scope.comments = l
-        $scope.comments = lectureModel.commentCRUD lecture, 'all'
+        $scope.comments = lectureModel.commentCRUD lecture
         $scope.addComment = () ->
-            lectureModel.addComment
-                promise: $scope.comments
-                newComment: $scope.comment
-                lecture: $routeParams.lectureId
+            $scope.comments = lectureModel.addComment lecture, $scope.comment
             $location.path('/comments/'+lecture+'/'+name)
         1
 

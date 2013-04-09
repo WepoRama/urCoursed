@@ -63,8 +63,9 @@ server.get '/api/comments/:lecture',  (req, res, next) ->
   res.send data: comments
   next()
 server.post '/api/comments/:lecture',  (req, res, next) ->
-  console.log 'Putting lecture in'
+  console.log 'Putting lecture in comments only'
   console.log req
+  res.send data:comments
   #console.log
   next()
 
@@ -82,14 +83,32 @@ server.get '/api/lecture/:lecture/comment/:comment', serveComments
 
 
 saveComment = (req, res, next) ->
-  console.log 'Putting comment in'
+  console.log 'Putting comment in (alc)'
   console.log req.params.data
   comments.push req.param.data
+  console.log "resulting in:"
   console.log comments
   res.send data:comments
   next()
 server.post '/api/lecture/:lecture/comment/:comment', saveComment
 server.put '/api/lecture/:lecture/comment/:comment', saveComment
+
+server.put  '/api/lecture/:lecture', saveComment
+#            /api/lecture/:lecture'
+server.post '/api/lecture/:lecture', saveComment
+server.get  '/api/lecture/:lecture',  serveComments
+
+logActivity = (req, res, next) ->
+  console.log 'Putting comment in (alc)'
+  console.log req.params
+  console.log req.params.data
+  res.send data:comments
+server.put  '/api/lecture/', logActivity
+server.post '/api/lecture/', logActivity
+server.get  '/api/lecture/', logActivity
+server.put  '/api/lecture', logActivity
+server.post '/api/lecture', logActivity
+server.get  '/api/lecture', logActivity
 
 server.get(/\/web\/?.*/, restify.serveStatic({
   directory: '.'
