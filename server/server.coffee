@@ -134,7 +134,7 @@ saveComment = ( data ) ->
 getComments = (lecture) ->
     console.log 'Getting comments ' + lecture
     console.log 'All is ' + comments
-    # this wonderful piece of coffescript one-liner comes from:
+    # this wonderful piece of coffescript one-liner is adapted from:
     #   http://ricardo.cc/2011/06/02/10-CoffeeScript-One-Liners-to-Impress-Your-Friends.html
     [failed, passed ] = comments.reduce ((p,c) -> p[+(c.lecture == lecture)].push c; p), [[],[]]
     console.log 'will serve: ' + passed
