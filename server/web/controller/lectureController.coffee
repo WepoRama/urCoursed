@@ -2,14 +2,6 @@
 uLecture.controller 'lectureController',
     ($scope, $location, $routeParams,lectureModel) ->
         $scope.lectures = lectureModel.lectures 1
-
-        ###
-        $scope.addLecture = () ->
-            lectureModel.addLecture
-                url: $routeParams.url
-                name: $routeParams.name
-            $location.path('/manageLectures/')
-        ###
 uLecture.controller 'commentController',
     ($scope, $location, $routeParams,$resource, lectureModel) ->
         lecture = $routeParams.lectureId

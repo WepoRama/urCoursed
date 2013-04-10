@@ -63,6 +63,7 @@ server.get '/api/dbstatus/',  (req, res, next) ->
     detail: 'we hope'
   next()
     
+###
 server.get '/api/lectures/:course',  (req, res, next) ->
   #there can be only one course, ignore course
   console.log('Reading lectures:')
@@ -82,18 +83,7 @@ server.post '/api/comments/:lecture',  (req, res, next) ->
   #console.log
   next()
 
-serveComments = (req, res, next) ->
-  console.log 'Serving comments for lecture'
-  console.log req.params
-  if not req.params.comment or req.params.comment == 'all'
-    res.send data:comments
-  else
-    res.send data:comments[req.params.comment]
-  #console.log
-  next()
-server.get '/api/lecture/:lecture/comment',  serveComments
-server.get '/api/lecture/:lecture/comment/:comment', serveComments
-
+###
 
 ###
 saveComment = (req, res, next) ->
@@ -154,6 +144,15 @@ addComment = (req, res, next) ->
   res.send
     data: getComments req.params.data.stuff
   next()
+serveComments = (req, res, next) ->
+  console.log 'Serving comments for lecture'
+  console.log req.params
+  if not req.params.comment or req.params.comment == 'all'
+    res.send data:comments
+  else
+    res.send data:comments[req.params.comment]
+  #console.log
+  next()
 
 server.post '/api/lecture',  addLecture
 server.post '/api/lecture/', addLecture
@@ -162,8 +161,9 @@ server.get  '/api/lecture', (req, res, next) ->
     next()
 
 server.post '/api/lecture/:lecture/comment', addComment
-server.put '/api/lecture/:lecture/comment', addComment
-
+server.put  '/api/lecture/:lecture/comment', addComment
+server.get  '/api/lecture/:lecture/comment',  serveComments
+server.get  '/api/lecture/:lecture/comment/:comment', serveComments
 
 ###
 #   Static content and server beyond this point
