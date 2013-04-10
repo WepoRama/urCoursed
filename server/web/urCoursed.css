@@ -13,9 +13,14 @@ body
 {
    display:none;
 }
+#ILTW
+{
+    padding-left:10px;
+    font-weight:bold;
+}
 h1
 {
-	color: #ffffff;
+	color: #fff;
 	background-image: url('beans.jpeg');
 	font-size: 50px;
 	padding-left: 5px;
@@ -28,11 +33,12 @@ h1
 }
 #logo
 {
+    margin-top: 10px;
     float: left;
-    color:#f00;
+    color:#333;
     width:344px;
     height:258px;
-    padding:5px 10px;
+    padding:-5px 10px;
     background-image: url('reynir.jpg');
     background-repeat: no-repeat;
 }
@@ -41,18 +47,33 @@ h1
     float:right;
     list-style:none;
     padding-left: 0;
-    border:5px solid fuchsia;
+    border-top:1px solid #333;
+    border-bottom:1px solid #333;
+    border-right:1px solid #333;
+    background-color:#cc6600;
 }
 #navigation li
 {
+    border-left: 1px solid #333;
+    color:#fff; 
     float: left;
     padding: 4px 5px;
 }
+#navigation a
+    {
+        text-decoration:none;
+        color:#fff;
+    }
+    
+#navigation a:hover
+    {
+        color:#333;
+    }
 #clear
 {
     clear:both;
 }
-@media only screen and (max-device-width: 720px)
+@media only screen and (max-device-width: 720x)
 {
     #logo
     {
