@@ -21,5 +21,7 @@ uLecture.service 'lectureModel', ($resource) ->
         stuff = new LectureComments {lecture: lecture }
         stuff.data = {
                 author: 'me'
+                lecture: lecture
                 text: comment }
         stuff.$add()
+        stuff

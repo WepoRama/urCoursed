@@ -11,8 +11,8 @@ uLecture.controller 'commentController',
         #$scope.comments = lectureModel.comments $resource, lecture, (l) -> #$scope.comments = l
         $scope.comments = lectureModel.getComments name
         $scope.addComment = () ->
-            $scope.comments = lectureModel.addComment lecture, $scope.comment
-            name = name + 'f'
+            #$scope.comments = #lectureModel.getComments name
+            $scope.comments = lectureModel.addComment name, $scope.comment
             $location.path('/comments/'+lecture+'/'+name)
 uLecture.controller 'addLectureController',
     ($scope, $location, $routeParams,lectureModel) ->

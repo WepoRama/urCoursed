@@ -38,7 +38,7 @@
 
 
   server = restify.createServer({
-    name: 'urCourse',
+    name: 'urCoursed',
     version: '1.0.0'
   });
 
@@ -111,66 +111,14 @@
   server.get('/api/dbstatus/', function(req, res, next) {
     console.log('checking status');
     res.send({
-      status: 'mongodb',
-      detail: 'we hope'
+      status: 'static',
+      detail: 'mongodb soon we hope'
     });
     return next();
   });
 
   /*
-  server.get '/api/lectures/:course',  (req, res, next) ->
-    #there can be only one course, ignore course
-    console.log('Reading lectures:')
-    console.log lectures
-    res.send data: lectures
-    next()
-  server.get '/api/comments/:lecture',  (req, res, next) ->
-    console.log 'Reading comments'
-    console.log req.params.lecture
-    console.log comments
-    res.send data: comments
-    next()
-  server.post '/api/comments/:lecture',  (req, res, next) ->
-    console.log 'Putting lecture in comments only'
-    console.log req
-    res.send data:comments
-    #console.log
-    next()
-  */
-
-
-  /*
-  saveComment = (req, res, next) ->
-    console.log 'Putting comment in (alc)'
-    console.log req.params.data
-    comments.push req.param.data
-    console.log "resulting in:"
-    console.log comments
-    res.send data:comments
-    next()
-  server.post '/api/lecture/:lecture/comment/:comment', saveComment
-  server.put '/api/lecture/:lecture/comment/:comment', saveComment
-  
-  server.put  '/api/lecture/:lecture', saveComment
-  #            /api/lecture/:lecture'
-  server.post '/api/lecture/:lecture', saveComment
-  server.get  '/api/lecture/:lecture',  serveComments
-  
-  logActivity = (req, res, next) ->
-    console.log 'LOggin Actgivitiy comment in (alc)'
-    console.log req
-    console.log req.params
-    console.log req.params.data
-    res.send data:comments
-  
-  server.put  '/api/lecture/', logActivity
-  
-  server.put  '/api/lecture', logActivity
-  */
-
-
-  /*
-  #   In proper use; upto but excluding next comment
+  #   Data serves and manipulation
   */
 
 
@@ -208,12 +156,12 @@
   };
 
   addComment = function(req, res, next) {
-    console.log('Adding neW commet');
-    console.log(req.params);
-    console.log(req.params.data);
+    var comms;
+
     saveComment(req.params.data);
+    comms = getComments(req.params.lecture);
     res.send({
-      data: getComments(req.params.data.stuff)
+      data: comms
     });
     return next();
   };
@@ -221,13 +169,8 @@
   serveComments = function(req, res, next) {
     var comms;
 
-    console.log('Serving comments for lecture');
-    console.log(req.params);
     comms = getComments(req.params.lecture);
     if (!req.params.comment || req.params.comment === 'all') {
-      console.log('We Serve All');
-      console.log(req.params.lecture);
-      console.log(comms);
       res.send({
         data: comms
       });
@@ -270,15 +213,6 @@
   server.listen(8080, function() {
     return console.log('%s listening at %s', server.name, server.url);
   });
-
-  /*
-  lectures = []
-  db.collection('lectures', (err, collection) ->
-      collection.find (err, collection) ->
-          while collection.hasNext
-              lectures.push collection.next
-  */
-
 
   /*
   app.get("/", function(req, res){
