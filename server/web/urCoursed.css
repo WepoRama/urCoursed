@@ -73,7 +73,7 @@ h1
 {
     clear:both;
 }
-@media only screen and (max-device-width: 720x)
+@media only screen and (max-device-width: 480px)
 {
     #logo
     {
