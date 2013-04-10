@@ -95,6 +95,7 @@ server.get '/api/lecture/:lecture/comment',  serveComments
 server.get '/api/lecture/:lecture/comment/:comment', serveComments
 
 
+###
 saveComment = (req, res, next) ->
   console.log 'Putting comment in (alc)'
   console.log req.params.data
@@ -121,8 +122,10 @@ logActivity = (req, res, next) ->
 server.put  '/api/lecture/', logActivity
 
 server.put  '/api/lecture', logActivity
+###
 
 
+# /api/lecture/newComm/comment
 ###
 #   In proper use; upto but excluding next comment
 ###
@@ -130,6 +133,12 @@ saveLecture = ( data ) ->
   console.log 'saving lecture'
   console.log data.url
   lectures.push data
+saveComment = ( data ) ->
+  console.log 'saving comment'
+  console.log data.text
+  comments.push data
+getComments = (lecture) ->
+    comments
 addLecture = (req, res, next) ->
   console.log 'Adding new lecture'
   console.log req.params.data
@@ -137,12 +146,28 @@ addLecture = (req, res, next) ->
   ##res.send data:comments
   res.send 200
   next()
+addComment = (req, res, next) ->
+  console.log 'Adding neW commet'
+  console.log req.params
+  console.log req.params.data
+  saveComment req.params.data
+  res.send
+    data: getComments req.params.data.stuff
+  next()
+
 server.post '/api/lecture',  addLecture
 server.post '/api/lecture/', addLecture
 server.get  '/api/lecture', (req, res, next) ->
     res.send data:lectures
     next()
 
+server.post '/api/lecture/:lecture/comment', addComment
+server.put '/api/lecture/:lecture/comment', addComment
+
+
+###
+#   Static content and server beyond this point
+###
 server.get(/\/web\/?.*/, restify.serveStatic({
 directory: '.'
 }))

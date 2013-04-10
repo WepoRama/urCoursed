@@ -2,6 +2,13 @@
 uLecture.service 'lectureModel', ($resource) ->
     Lecture = $resource '/api/lecture/:lecture',
         lecture: '@lecture'
+    LectureComments = $resource '/api/lecture/:lecture/comment/:comment', {
+        #                        /api/lecture/1       /comment/1
+            lecture: '@lecture'
+            comment: '@comment'
+        }, {
+            add: {method: 'POST'}
+        }
     @addLecture = (data) ->
         data.author = 'me'
         lecture = new Lecture {data}
@@ -9,6 +16,15 @@ uLecture.service 'lectureModel', ($resource) ->
     @lectures = (course) ->
         #'course will ignore for now
         lecture = Lecture.get { }, () ->
+    @getComments = ( lecture, comment ) ->
+        comments = LectureComments.get { lecture: lecture }, ()->
+    @addComment = ( lecture, comment ) ->
+        stuff = new LectureComments {lecture: lecture }
+        stuff.data = {
+                author: 'me'
+                text: comment }
+        stuff.$add()
+
     ###
     #    move used func above this line
     ###
@@ -21,13 +37,6 @@ uLecture.service 'lectureModel', ($resource) ->
         },
         {query: {method: 'JSONP'}}
     #LectureComments = $resource '/api/lecture/:lecture/comment/:comment', {
-    LectureComments = $resource '/api/lecture/:lecture', {
-        #                        /api/lecture/1       /comment/1
-            lecture: '@lecture'
-            #comment: '@comment'
-        }, {
-            add: {method: 'POST'}
-        }
 
     @XXlectures = (course) ->
         lecture = Lists.query {
@@ -39,18 +48,10 @@ uLecture.service 'lectureModel', ($resource) ->
             resource: 'comments'
             detail: lecture
         }, () -> comments.$save()
-    @commentCRUD = ( lecture, comment ) ->
+    @XXXcommentCRUD = ( lecture, comment ) ->
         #comments = LectureComments.get { lecture: lecture , comment: comment}, ()->
         comments = LectureComments.get { lecture: lecture }, ()->
             comments.$save()
-    @addComment = ( data ) ->
-        stuff = LectureComments.save {lecture: 'newComm' },
-            #stuff.newComment =
-            data: {author: 'me'
-            text: 'stuff'}, ()->
-                stuff.$save()
-        #data.promise.data.push { text: data.newComment author: 'me'}
-        #comments = LectureComments.get { lecture: lecture }, ()-> comments.newComment = data.newComment; comments.$save
     @addCommentSingle = ( data ) ->
         addComments = LectureComments.save
                 data:{text: data.newComment

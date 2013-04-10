@@ -20,7 +20,7 @@ uLecture.controller('commentController', function($scope, $location, $routeParam
     return true;
   };
   $scope.name = name;
-  $scope.comments = lectureModel.commentCRUD(lecture);
+  $scope.comments = lectureModel.getComments(lecture);
   return $scope.addComment = function() {
     $scope.comments = lectureModel.addComment(lecture, $scope.comment);
     name = name + 'f';

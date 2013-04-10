@@ -17,7 +17,7 @@ uLecture.controller 'commentController',
         $scope.isTeacher = () -> true
         $scope.name = name
         #$scope.comments = lectureModel.comments $resource, lecture, (l) -> #$scope.comments = l
-        $scope.comments = lectureModel.commentCRUD lecture
+        $scope.comments = lectureModel.getComments lecture
         $scope.addComment = () ->
             $scope.comments = lectureModel.addComment lecture, $scope.comment
             name = name + 'f'
