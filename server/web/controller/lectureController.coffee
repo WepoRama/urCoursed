@@ -1,7 +1,6 @@
 
 uLecture.controller 'lectureController',
     ($scope, $location, $routeParams,lectureModel) ->
-        #$scope.$apply () -> $scope.nick = l
         $scope.lectures = lectureModel.lectures 1
 
         ###

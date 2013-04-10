@@ -2,6 +2,22 @@
 uLecture.service('lectureModel', function($resource) {
   var Lecture, LectureComments, Lists;
 
+  Lecture = $resource('/api/lecture/:lecture', {
+    lecture: '@lecture'
+  });
+  this.addLecture = function(data) {
+    var lecture;
+
+    data.author = 'me';
+    lecture = new Lecture({
+      data: data
+    });
+    return lecture.$save();
+  };
+  /*
+  #    move used func above this line
+  */
+
   Lists = $resource('/api/:resource/:detail', {
     resource: '@resource',
     detail: '@detail',
@@ -18,9 +34,6 @@ uLecture.service('lectureModel', function($resource) {
     add: {
       method: 'POST'
     }
-  });
-  Lecture = $resource('/api/lecture/:lecture', {
-    lecture: '@lecture'
   });
   this.lectures = function(course) {
     var lecture;
@@ -65,7 +78,7 @@ uLecture.service('lectureModel', function($resource) {
       return stuff.$save();
     });
   };
-  this.addCommentSingle = function(data) {
+  return this.addCommentSingle = function(data) {
     var addComments;
 
     addComments = LectureComments.save({
@@ -78,15 +91,6 @@ uLecture.service('lectureModel', function($resource) {
       comment: comment
     }, function() {});
     return data.promise.get();
-  };
-  return this.addLecture = function(data) {
-    var lecture;
-
-    data.author = 'me';
-    lecture = new Lecture({
-      data: data
-    });
-    return lecture.$save();
   };
   /*
   @addLecture = ( lecture ) ->

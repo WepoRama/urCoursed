@@ -1,5 +1,14 @@
 
 uLecture.service 'lectureModel', ($resource) ->
+    Lecture = $resource '/api/lecture/:lecture',
+        lecture: '@lecture'
+    @addLecture = (data) ->
+        data.author = 'me'
+        lecture = new Lecture {data}
+        lecture.$save()
+    ###
+    #    move used func above this line
+    ###
     Lists = $resource '/api/:resource/:detail' ,
         {
             resource: '@resource'
@@ -16,8 +25,6 @@ uLecture.service 'lectureModel', ($resource) ->
         }, {
             add: {method: 'POST'}
         }
-    Lecture = $resource '/api/lecture/:lecture',
-        lecture: '@lecture'
 
     @lectures = (course) ->
         lecture = Lists.query {
@@ -47,11 +54,7 @@ uLecture.service 'lectureModel', ($resource) ->
                 author: 'me'},
                 { lecture: lecture , comment: comment}, ()->
         data.promise.get()
-    @addLecture = (data) ->
-        data.author = 'me'
-        lecture = new Lecture {data}
-        lecture.$save()
-            
+
         #comments.push comment
     ###
     @addLecture = ( lecture ) ->
