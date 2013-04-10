@@ -47,9 +47,8 @@ uLecture.service 'lectureModel', ($resource) ->
                 author: 'me'},
                 { lecture: lecture , comment: comment}, ()->
         data.promise.get()
-        1
-    1
     @addLecture = (data) ->
+        data.author = 'me'
         lecture = new Lecture {data}
         lecture.$save()
             

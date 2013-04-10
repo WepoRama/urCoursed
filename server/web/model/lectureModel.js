@@ -77,13 +77,12 @@ uLecture.service('lectureModel', function($resource) {
       lecture: lecture,
       comment: comment
     }, function() {});
-    data.promise.get();
-    return 1;
+    return data.promise.get();
   };
-  1;
   return this.addLecture = function(data) {
     var lecture;
 
+    data.author = 'me';
     lecture = new Lecture({
       data: data
     });

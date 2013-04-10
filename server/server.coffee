@@ -1,11 +1,9 @@
 #/* Express quick setup */
 
 restify = require('restify')
-#express = require('express')
-#app = express()
 
 #/* mongodb setup */
-#mongo = require('mongodb')
+mongo = require('mongodb')
 
 host = process.env['DOTCLOUD_DB_MONGODB_HOST'] || 'localhost'
 port = process.env['DOTCLOUD_DB_MONGODB_PORT'] ||  27017
@@ -13,12 +11,29 @@ port = parseInt(port)
 user = process.env['DOTCLOUD_DB_MONGODB_LOGIN'] || undefined
 pass = process.env['DOTCLOUD_DB_MONGODB_PASSWORD'] || undefined
 
-#mongoServer = new mongo.Server(host, port, {})
-#db = new mongo.Db("test", mongoServer, {auto_reconnect:true,w:'majority'})
+###
+mongoServer = new mongo.Server host, port, {}
+db = new mongo.Db
+    "urCoursed", mongoServer, {
+        auto_reconnect:true
+        w:'majority'}
+dbInit = ()->
+    lectures = []
+    db.collection('lectures', (err, collection) ->
+        collection.find (err, collection) ->
+            while collection.hasNext
+                lectures.push collection.next
+    if lectures.length == 0
+        db.lectures.insert
+            url: 'http://www.youtube.com/watch?v=WuiHuZq_cg4'
+            name: 'one'
+            author:'us'
+dbInit()
 
-
+###
+# restify setup:
 server = restify.createServer
-  name: 'chattycat'
+  name: 'urCourse'
   version: '1.0.0'
 server.use restify.acceptParser(server.acceptable)
 server.use restify.queryParser()
@@ -44,8 +59,8 @@ server.get '/api/',  (req, res, next) ->
 server.get '/api/dbstatus/',  (req, res, next) ->
   console.log('checking status')
   res.send
-    status: 'static'
-    detail: 'no database connected'
+    status: 'mongodb'
+    detail: 'we hope'
   next()
     
 server.get '/api/lectures/:course',  (req, res, next) ->
@@ -104,13 +119,37 @@ logActivity = (req, res, next) ->
   res.send data:comments
 
 server.put  '/api/lecture/', logActivity
-server.post '/api/lecture/', logActivity
 server.get  '/api/lecture/', logActivity
 
 server.put  '/api/lecture', logActivity
-server.post '/api/lecture', logActivity
-server.get  '/api/lecture', logActivity
+server.get  '/api/lecture', (req, res, next) -> #sendAllLectures
+    ###
+    lectures = []
+    db.collection('lectures', (err, collection) ->
+        collection.find (err, collection) ->
+            while collection.hasNext
+                lectures.push collection.next
+    ###
+    res.send data:lectures
 
+
+###
+#   In proper use
+###
+saveLecture = ( data ) ->
+  console.log 'saving lecture'
+  console.log data.url
+  lectures.push data
+addLecture = (req, res, next) ->
+  console.log 'Adding new lecture'
+  console.log req.params.data
+  saveLecture req.params.data
+  ##res.send data:comments
+  res.send 200
+  next()
+server.post '/api/lecture', addLecture
+server.post '/api/lecture/', addLecture
+            
 server.get(/\/web\/?.*/, restify.serveStatic({
   directory: '.'
   }))
