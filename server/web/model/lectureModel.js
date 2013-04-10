@@ -14,6 +14,11 @@ uLecture.service('lectureModel', function($resource) {
     });
     return lecture.$save();
   };
+  this.lectures = function(course) {
+    var lecture;
+
+    return lecture = Lecture.get({}, function() {});
+  };
   /*
   #    move used func above this line
   */
@@ -35,7 +40,7 @@ uLecture.service('lectureModel', function($resource) {
       method: 'POST'
     }
   });
-  this.lectures = function(course) {
+  this.XXlectures = function(course) {
     var lecture;
 
     return lecture = Lists.query({

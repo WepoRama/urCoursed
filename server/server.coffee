@@ -119,22 +119,12 @@ logActivity = (req, res, next) ->
   res.send data:comments
 
 server.put  '/api/lecture/', logActivity
-server.get  '/api/lecture/', logActivity
 
 server.put  '/api/lecture', logActivity
-server.get  '/api/lecture', (req, res, next) -> #sendAllLectures
-    ###
-    lectures = []
-    db.collection('lectures', (err, collection) ->
-        collection.find (err, collection) ->
-            while collection.hasNext
-                lectures.push collection.next
-    ###
-    res.send data:lectures
 
 
 ###
-#   In proper use
+#   In proper use; upto but excluding next comment
 ###
 saveLecture = ( data ) ->
   console.log 'saving lecture'
@@ -147,16 +137,27 @@ addLecture = (req, res, next) ->
   ##res.send data:comments
   res.send 200
   next()
-server.post '/api/lecture', addLecture
+server.post '/api/lecture',  addLecture
 server.post '/api/lecture/', addLecture
-            
+server.get  '/api/lecture', (req, res, next) ->
+    res.send data:lectures
+    next()
+
 server.get(/\/web\/?.*/, restify.serveStatic({
-  directory: '.'
-  }))
+directory: '.'
+}))
 
 server.listen 8080, () ->
   console.log '%s listening at %s', server.name, server.url
 
+#sendAllLectures
+###
+lectures = []
+db.collection('lectures', (err, collection) ->
+    collection.find (err, collection) ->
+        while collection.hasNext
+            lectures.push collection.next
+###
 
 ###
 app.get("/", function(req, res){

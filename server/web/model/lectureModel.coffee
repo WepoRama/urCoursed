@@ -6,6 +6,9 @@ uLecture.service 'lectureModel', ($resource) ->
         data.author = 'me'
         lecture = new Lecture {data}
         lecture.$save()
+    @lectures = (course) ->
+        #'course will ignore for now
+        lecture = Lecture.get { }, () ->
     ###
     #    move used func above this line
     ###
@@ -26,7 +29,7 @@ uLecture.service 'lectureModel', ($resource) ->
             add: {method: 'POST'}
         }
 
-    @lectures = (course) ->
+    @XXlectures = (course) ->
         lecture = Lists.query {
                 resource: 'lectures'
                 detail: course
