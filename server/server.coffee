@@ -41,11 +41,15 @@ server.use restify.bodyParser()
 server.use restify.jsonp()
 
 comments = [
-    {text: 'fine this one', author: 'him'}
-    {text: 'fine this two', author: 'me'}
-    {text: 'fine this three', author: 'other'}
-    {text: 'fine this four', author: 'somebody'}
-]
+        {lecture: 'one', text: 'fine this one', author: 'him'}
+        {lecture: 'one', text: 'fine this two', author: 'me'}
+        {lecture: 'one', text: 'fine this three', author: 'other'}
+        {lecture: 'one', text: 'fine this four', author: 'somebody'}
+        {lecture: 'two', text: 'two this one', author: 'him'}
+        {lecture: 'two', text: 'two this two', author: 'me'}
+        {lecture: 'two', text: 'two this three', author: 'other'}
+        {lecture: 'two', text: 'two this four', author: 'somebody'}
+    ]
 
 lectures = [
     {url: 'http://www.youtube.com/watch?v=WuiHuZq_cg4', name: 'one', author: 'us', id: 1}
@@ -128,7 +132,13 @@ saveComment = ( data ) ->
   console.log data.text
   comments.push data
 getComments = (lecture) ->
-    comments
+    console.log 'Getting comments ' + lecture
+    console.log 'All is ' + comments
+    # this wonderful piece of coffescript one-liner comes from:
+    #   http://ricardo.cc/2011/06/02/10-CoffeeScript-One-Liners-to-Impress-Your-Friends.html
+    [failed, passed ] = comments.reduce ((p,c) -> p[+(c.lecture == lecture)].push c; p), [[],[]]
+    console.log 'will serve: ' + passed
+    passed
 addLecture = (req, res, next) ->
   console.log 'Adding new lecture'
   console.log req.params.data
@@ -147,10 +157,14 @@ addComment = (req, res, next) ->
 serveComments = (req, res, next) ->
   console.log 'Serving comments for lecture'
   console.log req.params
+  comms = getComments req.params.lecture
   if not req.params.comment or req.params.comment == 'all'
-    res.send data:comments
+    console.log 'We Serve All'
+    console.log req.params.lecture
+    console.log comms
+    res.send data: comms
   else
-    res.send data:comments[req.params.comment]
+    res.send data:comms[req.params.comment]
   #console.log
   next()
 
