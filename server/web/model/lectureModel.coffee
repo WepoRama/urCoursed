@@ -24,3 +24,4 @@ uLecture.service 'lectureModel', ($resource) ->
                 lecture: lecture
                 text: comment }
         stuff.$add()
+        stuff

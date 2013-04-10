@@ -45,6 +45,7 @@ uLecture.service('lectureModel', function($resource) {
       lecture: lecture,
       text: comment
     };
-    return stuff.$add();
+    stuff.$add();
+    return stuff;
   };
 });
