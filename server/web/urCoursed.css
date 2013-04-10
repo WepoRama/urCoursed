@@ -4,7 +4,7 @@ body
 	margin: 15px 0px 0px 15px;
     padding: 5px 10px 5px 10px;
 }
-
+/*Desktop - Default*/
 #GMIOY
 {
     display:none;
@@ -18,6 +18,14 @@ body
     padding-left:10px;
     font-weight:bold;
 }
+#GMIP
+{
+    display:none;
+}
+banner
+{
+    background-image: url('beans.jpeg')
+}
 h1
 {
 	color: #fff;
@@ -29,7 +37,6 @@ h1
 	border: 1px solid black;
     border-radius: 7px;
     box-shadow: 5px 5px 3px #888888;
-    min-width:750px;
 }
 #logo
 {
@@ -51,6 +58,8 @@ h1
     border-bottom:1px solid #333;
     border-right:1px solid #333;
     background-color:#cc6600;
+    border-radius: 3px;
+    box-shadow: 2px 2px 1px;
 }
 #navigation li
 {
@@ -73,8 +82,73 @@ h1
 {
     clear:both;
 }
-@media only screen and (max-device-width: 480px)
+/*Ipad*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
 {
+    #GMIOY
+    {
+        display:none;
+    }
+    #GMIP
+    {
+        display:block;
+    }
+    #banner
+    {
+        color: #fff;
+	    background-image: url('apl.jpeg');
+        /*background-color:fuchsia;
+        background-size:500px;*/
+        border-radius: 3px;
+        box-shadow: 2px 2px 1px;
+        margin-right:10px;
+        
+    }
+    #logo
+    {
+        background: url('IRead.jpg');
+        background-repeat:no-repeat;
+        width: 440px;
+        color:#ffffff;
+    }
+    h1
+    {
+        font-size: 30px;
+	    text-shadow: 2px 2px #333333;
+    }
+    #message
+    {
+        display:block;
+    }
+    #GMIP
+    {
+        display:block;
+    }
+    #GMIOY
+    {
+        display:none;
+        color:#fff;
+        font-size:15px;
+        font-weight:bold;
+    }
+    #ILTW
+    {
+        display:none;
+    }
+}
+/*Smart phones*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px)
+{
+    #banner
+    {
+        color: #fff;
+	    background-image: url('beans.jpeg');
+        background-size:650px;
+        border-radius: 3px;
+        box-shadow: 2px 2px 1px;
+        margin-right:10px;
+        
+    }
     #logo
     {
         background: url('ICUReynir.jpg');
@@ -84,12 +158,8 @@ h1
     }
     h1
     {
-	    color: #fff;
-	    background-image: url('beans.jpeg');
-	    font-size: 30px;
+        font-size: 30px;
 	    text-shadow: 2px 2px #333333;
-        border-radius: 3px;
-        box-shadow: 2px 2px 1px;
     }
     #message
     {

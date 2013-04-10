@@ -1,7 +1,8 @@
 <div class='addLecture'>
     <form name='newLecture'>
-        <label for='addLecture'>New lecture</label>
+        <label for='addLecture'>Youtube url</label>
         <input id='LectureURL' ng-model='url'></input>
+        <label for='LectureName'>Title</label>
         <input id='LectureName' ng-model='name'></input>
         <input type='checkbox' id='AnotherLecture' ng-model='more'> add more</input>
         <button ng-click='addLecture()'>Add Lecture </button>
