@@ -13,6 +13,12 @@ uLecture.service('lectureModel', function($resource) {
       method: 'POST'
     }
   });
+  this.isLoggedIn = function() {
+    return userLoggedIn;
+  };
+  this.isTeacher = function() {
+    return userLoggedIn && userProfile.displayName === 'Haraldur Karlsson';
+  };
   this.addLecture = function(data) {
     var lecture;
 

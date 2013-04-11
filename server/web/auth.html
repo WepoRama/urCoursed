@@ -53,11 +53,11 @@
         <p id="GMIP">I got my iPad!</p>
     </div>
     <ul id="navigation">
-        <li>
-            <a href='#/add' ng-hide="userLoggedIn" ng-class="navAdd" ng-click="loginWindowVisible=false;navAdd='navactive';navlec='';navlog=''">Add</a>
+        <li id='add'>
+            <a href='#/add' ng-class="navAdd" ng-click="loginWindowVisible=false;navAdd='navactive';navlec='';navlog=''">Add</a>
         </li>
-        <li>
-            <a href='#/lectures'ng-hide="userLoggedIn"  ng-class="navlec" ng-click="loginWindowVisible=false;navAdd='';navlec='navactive';navlog=''" >Lectures</a>
+        <li id='lec'>
+            <a href='#/lectures'  ng-class="navlec" ng-click="loginWindowVisible=false;navAdd='';navlec='navactive';navlog=''" >Lectures</a>
         </li>
         <li>
             <a href='#/login' ng-class="navlog" ng-click="loginWindowVisible=true;navAdd='';navlec='';navlog='navactive'" ng-init="loginWindowVisible=false">Login</a>

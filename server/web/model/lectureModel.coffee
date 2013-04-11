@@ -8,6 +8,8 @@ uLecture.service 'lectureModel', ($resource) ->
         }, {
             add: {method: 'POST'}
         }
+    @isLoggedIn = () -> userLoggedIn
+    @isTeacher = () -> userLoggedIn && userProfile.displayName == 'Haraldur Karlsson' #'Davíð Sigurðsson'
     @addLecture = (data) ->
         data.author = userProfile.displayName
         lecture = new Lecture {data}

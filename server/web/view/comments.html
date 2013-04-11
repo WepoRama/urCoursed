@@ -4,7 +4,7 @@ Discussion:
     <li ng-repeat='comment in comments.data'>
     {{comment.text}}</a> by: {{comment.author}}
 </ul>
-<div class='addComment'>
+<div class='addComment' ng-show="isLoggedIn()">
     <form name='newComment'>
         <label for='addComment'>Add Comment</label>
         <input id='commentURL' ng-model='comment'></input>

@@ -87,7 +87,7 @@ h1
     {
         color:#333;
     }
-#navigation navactive
+#navigation .navactive
 {
     color: green;
     font-weight:bold;

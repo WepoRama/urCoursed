@@ -8,7 +8,8 @@ uLecture.controller 'commentController',
     ($scope, $location, $routeParams,$resource, lectureModel) ->
         lecture = $routeParams.lectureId
         name = $routeParams.lectureName
-        $scope.isTeacher = () -> true
+        $scope.isTeacher = lectureModel.isTeacher
+        $scope.isLoggedIn = lectureModel.isLoggedIn
         $scope.name = name
         $scope.comments = lectureModel.getComments name
         $scope.addComment = () ->

@@ -1,5 +1,5 @@
 <div class='addLecture'>
-    <form name='newLecture'>
+    <form name='newLecture' ng-show="isTeacher()">
         <label for='addLecture'>Youtube url</label>
         <input id='LectureURL' ng-model='url'></input>
         <label for='LectureName'>Title</label>
