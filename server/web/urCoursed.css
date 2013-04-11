@@ -7,10 +7,6 @@ body
 	max-width: 800px;
 	min-width: 560px;
 }
-navactive
-{
-    color: green
-}
 /*Desktop - Default*/
 #GMIOY
 {
@@ -91,6 +87,10 @@ h1
     {
         color:#333;
     }
+#navigation navactive
+{
+    color: green;
+}
 #clear
 {
     clear:both;
