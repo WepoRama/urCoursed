@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html ng-app='uLecture'>
 <head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" ></script>
 <script src="js/angular.min.js"></script>
 <script src="js/angular-resource.js"></script>
+<script src="js/oauth2.js"></script>
 <script src="uLecture.js"></script>
 <script src="controller/lectureController.js"></script>
 <script src="model/lectureModel.js"></script>
 <link rel="stylesheet" type="text/css" href="urCoursed.css" />
 <Title> urCoursed </Title> 
+  <script type="text/javascript">
+  (function() {
+    var po = document.createElement('script');
+    po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://plus.google.com/js/client:plusone.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po, s);
+  })();
+  </script>
 <link rel="icon" type="image/png" href="/web/favicon.png">
 </head>
 <body>
@@ -32,5 +43,32 @@
         
     </div>
     <div ng-view></div>
+<script type="text/javascript">
+/**
+ * jQuery initialization
+ */
+$(document).ready(function() {
+  $('#disconnect').click(helper.disconnect);
+  $('#loaderror').hide();
+  if ($('[data-clientid="YOUR_CLIENT_ID"]').length > 0) {
+    alert('This sample requires your OAuth credentials (client ID) ' +
+        'from the Google APIs console:\n' +
+        '    https://code.google.com/apis/console/#:access\n\n' +
+        'Find and replace YOUR_CLIENT_ID with your client ID.'
+    );
+  }
+});
+
+/**
+ * Calls the helper method that handles the authentication flow.
+ *
+ * @param {Object} authResult An Object which contains the access token and
+ *   other authentication information.
+ */
+
+function onSignInCallback(authResult) {
+  helper.onSignInCallback(authResult);
+}
+</script>
 </body>
 </html>

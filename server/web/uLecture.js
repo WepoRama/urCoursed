@@ -2,9 +2,9 @@
 var uLecture, uLectureConfig;
 
 uLectureConfig = function($routeProvider) {
-  $routeProvider.when('//', {
+  $routeProvider.when('/login', {
     controller: 'lectureController',
-    templateUrl: 'view/lecture.html'
+    templateUrl: 'view/login.html'
   }).when('', {
     controller: 'lectureController',
     templateUrl: 'view/lecture.html'

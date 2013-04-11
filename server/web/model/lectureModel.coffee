@@ -9,7 +9,7 @@ uLecture.service 'lectureModel', ($resource) ->
             add: {method: 'POST'}
         }
     @addLecture = (data) ->
-        data.author = 'me'
+        data.author = helper.displayName
         lecture = new Lecture {data}
         lecture.$save()
     @lectures = (course) ->
@@ -20,7 +20,7 @@ uLecture.service 'lectureModel', ($resource) ->
     @addComment = ( lecture, comment ) ->
         stuff = new LectureComments {lecture: lecture }
         stuff.data = {
-                author: 'me'
+                author: helper.displayName
                 lecture: lecture
                 text: comment }
         stuff.$add()

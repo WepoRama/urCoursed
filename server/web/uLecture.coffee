@@ -2,9 +2,9 @@
 
 uLectureConfig = ($routeProvider) ->
     $routeProvider
-        .when '//',
+        .when '/login',
             controller: 'lectureController'
-            templateUrl: 'view/lecture.html'
+            templateUrl: 'view/login.html'
         .when '',
             controller: 'lectureController'
             templateUrl: 'view/lecture.html'
