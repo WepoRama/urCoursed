@@ -12,6 +12,7 @@ uLecture.controller 'commentController',
         $scope.name = name
         $scope.comments = lectureModel.getComments name
         $scope.addComment = () ->
+            #if helper.
             $scope.comments = lectureModel.addComment name, $scope.comment
             $location.path('/comments/'+lecture+'/'+name)
 uLecture.controller 'addLectureController',

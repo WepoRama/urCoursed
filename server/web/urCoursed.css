@@ -1,8 +1,11 @@
 body
 {
     font-family: arial,helvetica,sans-serif;
-	margin: 15px 0px 0px 15px;
+	margin-left: 20%;
+	margin-right: 20%;
     padding: 5px 10px 5px 10px;
+	max-width: 800px;
+	min-width: 560px;
 }
 /*Desktop - Default*/
 #GMIOY
@@ -21,6 +24,12 @@ body
 #GMIP
 {
     display:none;
+}
+#lectures
+{
+	width: 560px;
+    height: 321px;
+	padding: 10px;
 }
 banner
 {
@@ -83,8 +92,13 @@ h1
     clear:both;
 }
 /*Ipad*/
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
+@media only screen and (min-device-width : 481px) and (max-device-width : 1024px)
 {
+	body
+	{
+		margin-left: 10%;
+		margin-right: 10%;
+	}
     #GMIOY
     {
         display:none;
@@ -139,11 +153,22 @@ h1
 /*Smart phones*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px)
 {
+	body
+	{
+		min-width: 320px;
+		margin: 0px;
+	}
+	#lectures
+	{
+		width: 320px;
+		height: 188px;
+		padding: 10px;
+	}
     #banner
     {
         color: #fff;
 	    background-image: url('beans.jpeg');
-        background-size:650px;
+        background-size:100%;
         border-radius: 3px;
         box-shadow: 2px 2px 1px;
         margin-right:10px;
@@ -153,7 +178,8 @@ h1
     {
         background: url('ICUReynir.jpg');
         background-repeat:no-repeat;
-        width: 440px;
+        width: 100px;
+        height: 100px;
         color:#ffffff;
     }
     h1

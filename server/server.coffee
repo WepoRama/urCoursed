@@ -40,6 +40,7 @@ server.use restify.queryParser()
 server.use restify.bodyParser()
 server.use restify.jsonp()
 
+teachers = ['danielbsig@gmail.com','haralkar@gmail.com']
 comments = [
         {lecture: 'one', text: 'fine this one', author: 'him'}
         {lecture: 'one', text: 'fine this two', author: 'me'}

@@ -1,4 +1,4 @@
-
+var authentication = {}
 var helper = (function() {
   var BASE_API_PATH = 'plus/v1/';
 
@@ -81,16 +81,20 @@ var helper = (function() {
     /**
      * Gets and renders the currently signed in user's profile data.
      */
+    myInfo: {}
     profile: function(){
       var request = gapi.client.plus.people.get( {'userId' : 'me'} );
       request.execute( function(profile) {
         $('#profile').empty();
         if (profile.error) {
           $('#profile').append(profile.error);
+          myInfo.error=profile.error;
           return;
         }
         $('#profile').append(
             $('<p><img src=\"' + profile.image.url + '\"></p>'));
+        myInfo.imageUrl = profile.image.url;
+        myInfo.displayName = profile.displayName 
         $('#profile').append(
             $('<p>Hello ' + profile.displayName + '!<br />Tagline: ' +
             profile.tagline + '<br />About: ' + profile.aboutMe + '</p>'));

@@ -4,6 +4,13 @@ Lecture list:
     <!--a href='{{lecture.url}}'>{{lecture.name}}</a> owner: {{lecture.author}}-->
     <button ng-click='play(lecture.url)'>{{lecture.name}}</button> owner: {{lecture.author}} Discussion: <a href='#/comments/{{lecture.id}}/{{lecture.name}}'>{{lecture.name}}</a> 
 </ul>
-<iframe width="560" height="315" src="http://www.youtube.com/embed/{{vidjo}}" frameborder="0" allowfullscreen></iframe>
+<!-- width=auto height=auto */-->
+<div id="YT" >
+<iframe
+	width=100% height=100%
+	src="http://www.youtube.com/embed/{{vidjo}}"
+	frameborder="0" allowfullscreen >
+</iframe>
+</div>
 
 
