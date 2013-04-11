@@ -18,6 +18,8 @@ uLecture.controller 'commentController',
             $location.path('/comments/'+lecture+'/'+name)
 uLecture.controller 'addLectureController',
     ($scope, $location, $routeParams,lectureModel) ->
+        $scope.isTeacher = lectureModel.isTeacher
+        $scope.isLoggedIn = lectureModel.isLoggedIn
         $scope.addLecture = () ->
             lectureModel.addLecture
                 name: $scope.name

@@ -49,7 +49,7 @@ server.use(restify.bodyParser());
 
 server.use(restify.jsonp());
 
-teachers = ['danielbsig@gmail.com', 'haralkar@gmail.com'];
+teachers = ['Daníel', 'Haraldur'];
 
 comments = [
   {
@@ -201,6 +201,32 @@ server.put('/api/lecture/:lecture/comment', addComment);
 server.get('/api/lecture/:lecture/comment', serveComments);
 
 server.get('/api/lecture/:lecture/comment/:comment', serveComments);
+
+server.get('/api/teachers', function(req, res, next) {
+  res.send({
+    data: teachers
+  });
+  return next();
+});
+
+server.get('/api/teachers/:teacher', function(req, res, next) {
+  var isT, t;
+
+  t = teachers.map(function(m) {
+    if (req.params.teacher === m(1)) {
+
+    } else {
+      return 0;
+    }
+  });
+  isT = t.reduce(function(x, y) {
+    return x + y;
+  });
+  res.send({
+    data: isT > 0
+  });
+  return next();
+});
 
 /*
 #   Static content and server beyond this point

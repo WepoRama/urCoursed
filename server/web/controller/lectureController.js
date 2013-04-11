@@ -22,6 +22,8 @@ uLecture.controller('commentController', function($scope, $location, $routeParam
 });
 
 uLecture.controller('addLectureController', function($scope, $location, $routeParams, lectureModel) {
+  $scope.isTeacher = lectureModel.isTeacher;
+  $scope.isLoggedIn = lectureModel.isLoggedIn;
   return $scope.addLecture = function() {
     lectureModel.addLecture({
       name: $scope.name,

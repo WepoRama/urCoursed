@@ -40,7 +40,8 @@ server.use restify.queryParser()
 server.use restify.bodyParser()
 server.use restify.jsonp()
 
-teachers = ['danielbsig@gmail.com','haralkar@gmail.com']
+#teachers = ['danielbsig@gmail.com','haralkar@gmail.com']
+teachers = ['Daníel', 'Haraldur']
 comments = [
         {lecture: 'one', text: 'fine this one', author: 'him'}
         {lecture: 'one', text: 'fine this two', author: 'me'}
@@ -128,6 +129,14 @@ server.put  '/api/lecture/:lecture/comment', addComment
 server.get  '/api/lecture/:lecture/comment',  serveComments
 server.get  '/api/lecture/:lecture/comment/:comment', serveComments
 
+server.get  '/api/teachers', (req, res, next) ->
+    res.send data:teachers
+    next()
+server.get  '/api/teachers/:teacher', (req, res, next) ->
+    t = teachers.map (m)-> if req.params.teacher == m 1 else 0
+    isT = t.reduce (x,y)-> x+y
+    res.send data: isT > 0
+    next()
 ###
 #   Static content and server beyond this point
 ###

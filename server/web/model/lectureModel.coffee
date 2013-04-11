@@ -1,5 +1,7 @@
 
 uLecture.service 'lectureModel', ($resource) ->
+    Teacher = $resource '/api/teacher/:teacher',
+        teacher: '@teacher'
     Lecture = $resource '/api/lecture/:lecture',
         lecture: '@lecture'
     LectureComments = $resource '/api/lecture/:lecture/comment/:comment', {
