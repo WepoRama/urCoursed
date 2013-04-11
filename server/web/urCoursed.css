@@ -99,6 +99,10 @@ h1
 		margin-left: 10%;
 		margin-right: 10%;
 	}
+    #navigation
+    {
+        margin-right: 10px;
+    }
     #GMIOY
     {
         display:none;
@@ -111,8 +115,6 @@ h1
     {
         color: #fff;
 	    background-image: url('apl.jpeg');
-        /*background-color:fuchsia;
-        background-size:500px;*/
         border-radius: 3px;
         box-shadow: 2px 2px 1px;
         margin-right:10px;
@@ -158,6 +160,10 @@ h1
 		min-width: 320px;
 		margin: 0px;
 	}
+    #navigation
+    {
+        margin-right: 10px;
+    }
 	#lectures
 	{
 		width: 320px;

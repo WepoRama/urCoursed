@@ -16,7 +16,7 @@ uLecture.service('lectureModel', function($resource) {
   this.addLecture = function(data) {
     var lecture;
 
-    data.author = helper.displayName;
+    data.author = userProfile.displayName;
     lecture = new Lecture({
       data: data
     });
@@ -41,7 +41,7 @@ uLecture.service('lectureModel', function($resource) {
       lecture: lecture
     });
     stuff.data = {
-      author: helper.displayName,
+      author: userProfile.displayName,
       lecture: lecture,
       text: comment
     };
