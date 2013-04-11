@@ -54,13 +54,13 @@
     </div>
     <ul id="navigation">
         <li>
-            <a href='#/add' ng-click="loginWindowVisible=false">Add</a>
+            <a href='#/add' ng-class="navAdd" ng-click="loginWindowVisible=false;navAdd='navactive';navlec='';navlog=''">Add</a>
         </li>
         <li>
-            <a href='#/lectures' ng-click="loginWindowVisible=false" >Lectures</a>
+            <a href='#/lectures' ng-class="navlec" ng-click="loginWindowVisible=false;navAdd='';navlec='navactive';navlog=''" >Lectures</a>
         </li>
         <li>
-            <a href='#/login' ng-click="loginWindowVisible=true" ng-init="loginWindowVisible=false">Login</a>
+            <a href='#/login' ng-class="navlog" ng-click="loginWindowVisible=true;navAdd='';navlec='';navlog='navactive'" ng-init="loginWindowVisible=false">Login</a>
         </li>
     </ul>
     <div id="clear">
