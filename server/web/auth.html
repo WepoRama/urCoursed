@@ -54,10 +54,10 @@
     </div>
     <ul id="navigation">
         <li>
-            <a href='#/add' ng-class="navAdd" ng-click="loginWindowVisible=false;navAdd='navactive';navlec='';navlog=''">Add</a>
+            <a href='#/add' ng-hide="userLoggedIn" ng-class="navAdd" ng-click="loginWindowVisible=false;navAdd='navactive';navlec='';navlog=''">Add</a>
         </li>
         <li>
-            <a href='#/lectures' ng-class="navlec" ng-click="loginWindowVisible=false;navAdd='';navlec='navactive';navlog=''" >Lectures</a>
+            <a href='#/lectures'ng-hide="userLoggedIn"  ng-class="navlec" ng-click="loginWindowVisible=false;navAdd='';navlec='navactive';navlog=''" >Lectures</a>
         </li>
         <li>
             <a href='#/login' ng-class="navlog" ng-click="loginWindowVisible=true;navAdd='';navlec='';navlog='navactive'" ng-init="loginWindowVisible=false">Login</a>
@@ -106,6 +106,7 @@
   </div>
 </body>
 <script type="text/javascript">
+userLoggedIn=false
 var helper = (function() {
   var BASE_API_PATH = 'plus/v1/';
 
@@ -146,6 +147,7 @@ var helper = (function() {
     disconnect: function() {
       // Revoke the access token.
       userProfile=null
+      userLoggedIn=false
       $.ajax({
         type: 'GET',
         url: 'https://accounts.google.com/o/oauth2/revoke?token=' +
@@ -193,6 +195,7 @@ var helper = (function() {
       var request = gapi.client.plus.people.get( {'userId' : 'me'} );
       request.execute( function(profile) {
         userProfile = profile
+        userLoggedIn=true
         $('#profile').empty();
         if (profile.error) {
           $('#profile').append(profile.error);

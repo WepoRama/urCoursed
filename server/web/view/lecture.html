@@ -2,7 +2,7 @@ Lecture list:
 <ul>
     <li ng-repeat='lecture in lectures.data'>
     <!--a href='{{lecture.url}}'>{{lecture.name}}</a> owner: {{lecture.author}}-->
-    <button ng-hide="userProfile" ng-click='play(lecture.url)'>{{lecture.name}}</button> owner: {{lecture.author}} Discussion: <a href='#/comments/{{lecture.id}}/{{lecture.name}}'>{{lecture.name}}</a> 
+    <button ng-click='play(lecture.url)'>{{lecture.name}}</button> owner: {{lecture.author}} Discussion: <a href='#/comments/{{lecture.id}}/{{lecture.name}}'>{{lecture.name}}</a> 
 </ul>
 <!-- width=auto height=auto */-->
 <div id="YT" >
