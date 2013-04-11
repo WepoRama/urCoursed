@@ -20,7 +20,7 @@ uLecture.service('lectureModel', function($resource) {
     return userLoggedIn;
   };
   this.isTeacher = function() {
-    return userLoggedIn && userProfile.displayName === 'Haraldur Karlsson';
+    return userLoggedIn && (userProfile.displayName === 'Daniel Brandur Sigurgeirsson' || userProfile.displayName === 'Haraldur Karlsson' || userProfile.displayName === 'Elin Gylfadottir');
   };
   this.addLecture = function(data) {
     var lecture;

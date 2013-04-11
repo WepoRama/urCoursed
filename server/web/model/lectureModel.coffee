@@ -11,7 +11,10 @@ uLecture.service 'lectureModel', ($resource) ->
             add: {method: 'POST'}
         }
     @isLoggedIn = () -> userLoggedIn
-    @isTeacher = () -> userLoggedIn && userProfile.displayName == 'Haraldur Karlsson' #'Davíð Sigurðsson'
+    @isTeacher = () -> userLoggedIn && (
+        userProfile.displayName == 'Daniel Brandur Sigurgeirsson' ||
+        userProfile.displayName == 'Haraldur Karlsson' ||
+        userProfile.displayName == 'Elin Gylfadottir')
     @addLecture = (data) ->
         data.author = userProfile.displayName
         lecture = new Lecture {data}
